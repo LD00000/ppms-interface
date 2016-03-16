@@ -33,6 +33,7 @@ public class LcbService {
 			lcbService.setIsmsghead(new MsgHead());
 			
 			lcbService.setIsdochead(lcb);
+			System.out.println("lcb.getId():" + lcb.getId());
 			lcbService.setItdocitem(lcbItemDao.queryForListByHeadId(lcb.getId())); 
 			
 			lcbServiceBeans.add(lcbService);

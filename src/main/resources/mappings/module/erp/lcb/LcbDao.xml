@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sunwayworld.webservice.erp.business.lcb.dao.LcbDao">
+<mapper namespace="com.sunway.ws.module.erp.business.lcb.dao.LcbDao">
 
 	<!-- 从 PPMS 拉取合同数据 -->
 	<select id="pullLcb" statementType="CALLABLE">

@@ -25,7 +25,6 @@ public class ErpConsumerFactory {
 					
 					switch (wsInterface) {
 					case ERP_CGHT:
-						
 						consumer.registerListener(new MessageListener() {
 							
 							@Override
@@ -39,7 +38,15 @@ public class ErpConsumerFactory {
 						});
 						break;
 					case ERP_KJXY:
-			
+						consumer.registerListener(new MessageListener() {
+							
+							@Override
+							public DataStatus consumeMessage(MessageExt message) {
+								
+								
+								return DataStatus.SUCCESS;
+							}
+						});
 						break;
 					case ERP_CKD:
 			

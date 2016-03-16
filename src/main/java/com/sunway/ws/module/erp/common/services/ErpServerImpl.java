@@ -29,7 +29,7 @@ import com.sunway.ws.module.erp.business.rkd.bean.RkdFdServerBean;
 import com.sunway.ws.module.erp.common.Validators;
 import com.sunway.ws.module.erp.common.bean.MsgHead;
 
-@WebService(serviceName = "erpServer")
+@WebService(serviceName = "erpServer", targetNamespace="http://services.common.erp.webservice.sunwayworld.com/")
 @Component(value = "ErpServerImpl")
 public class ErpServerImpl implements ErpServer {
 	
