@@ -11,8 +11,7 @@
 	
 	<!-- 根据合同编码获得推送 ERP 的合同付款计划 -->
 	<select id="getPushErpCghtPays" resultType="cghtPayBean">
-		SELECT SEQ_INTERFACE.NEXTVAL ID,
-			   A.XH ZLINEID, 
+		SELECT A.XH ZLINEID, 
 			   A.HTBM, 
 			   A.XH, 
 			   A.FKLBBM, 

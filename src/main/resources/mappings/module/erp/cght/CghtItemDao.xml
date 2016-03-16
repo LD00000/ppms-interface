@@ -11,8 +11,7 @@
 	
 	<!-- 根据合同编码获得推送 ERP 的合同明细 -->
 	<select id="getPushErpCghtItems" resultType="cghtItemBean">
-	SELECT SEQ_INTERFACE.NEXTVAL ID,
-	       A.HTBM,
+	SELECT A.HTBM,
 	       A.XH,
 	       (SELECT D.QGDH FROM CGQGD D WHERE D.QGDBM = A.QGDBM),
 	       A.QGDMXSUBXH,
