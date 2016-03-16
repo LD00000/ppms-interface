@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunway.ws.module.erp.business.rkd.dao.RkdItemDao">
+
+	<!-- 根据入库单号，查询入库单明细接口表数据 -->
+	<select id="queryForListByRkdh" resultType="rkdItemBean">
+		SELECT * 
+		  FROM i_erp_rkd_item
+		 WHERE rkdh = #{rkdh}
+	</select>
+	
+	<select id="queryForListByHeadId" resultType="rkdItemBean">
+		SELECT * 
+		  FROM i_erp_rkd_item
+		 WHERE head_id = #{headId}
+	</select>
+	
+</mapper>

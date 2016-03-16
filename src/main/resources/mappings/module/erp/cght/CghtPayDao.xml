@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunway.ws.module.erp.business.cght.dao.CghtPayDao">
+	
+	<!-- 根据主表id，查询采购合同付款接口表数据 -->
+	<select id="queryForListByHeadId" resultType="cghtPayBean">
+		SELECT * 
+		  FROM i_erp_cght_pay
+		 WHERE head_id = #{headId}
+	</select>
+	
+	<!-- 根据合同编码获得推送 ERP 的合同付款计划 -->
+	<select id="getPushErpCghtPays" resultType="cghtPayBean">
+		SELECT SEQ_INTERFACE.NEXTVAL ID,
+			   A.XH ZLINEID, 
+			   A.HTBM, 
+			   A.XH, 
+			   A.FKLBBM, 
+			   A.FKJE, 
+			   TO_CHAR(A.JHFKRQ, 'YYYYMMDD') JHFKRQ, 
+			   A.BZ, 
+			   A.FKBL, 
+			   A.ZFFSBM
+	      FROM CGHTFKJH A
+	     WHERE A.HTBM = #{htbm}
+	</select>
+	
+</mapper>

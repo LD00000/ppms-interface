@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sunway.com/NewXMLSchema" 
+		xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		xmlns:tns="http://www.sunway.com/NewXMLSchema">
+		
+	<xs:element name="getCustomerRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="tns:customerIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getCustomerResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customer" type="tns:customer"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="customer">
+		<xs:sequence>
+			<xs:element name="email" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType id="customerIdType" name="customerIdType">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+	
+</xs:schema>

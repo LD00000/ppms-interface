@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd 
+	http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd ">
+	<!-- <http-conf:conduit name="*.http-conduit">   
+        <http-conf:client ConnectionTimeout="10000" ReceiveTimeout="1200000"/>  
+    </http-conf:conduit>  -->  
+    
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+	<!-- ERP 接口 begin -->
+	<!-- jax-ws 
+		  如果使用 spring 注解, implementor 的值需要设置成 #实现类的类名, 相应实现类要加@component注解，否则 spring 注解会失效 -->
+	<jaxws:endpoint id="erpserver" address="/erp" implementor="#ErpServerImpl">
+		<jaxws:inInterceptors>
+			<bean id="inInterceprot" class="com.sunway.ws.core.cxf.HttpInInterceptor">
+				<property name="type" value="service"/>
+				<property name="interfaceName" value="erpServerImpl"/>
+			</bean>
+		</jaxws:inInterceptors> 
+		<jaxws:outInterceptors>
+			<bean id="outInterceprot" class="com.sunway.ws.core.cxf.HttpOutInterceptor">
+				<property name="type" value="service"/>
+				<property name="interfaceName" value="erpServerImpl"/>
+			</bean>
+		</jaxws:outInterceptors>
+	</jaxws:endpoint>
+	
+</beans>

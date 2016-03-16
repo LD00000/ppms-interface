@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunway.ws.module.erp.business.cght.dao.CghtDao">
+
+	<!-- 从 PPMS 拉取合同数据 -->
+	<select id="pullCght" statementType="CALLABLE">
+		{CALL PROC_I_ERP_PULL_CGHT}
+	</select>
+	
+	<!-- 更新接口表状态 -->
+	<update id="updateStatus">
+		UPDATE I_ERP_CGHT SET STATUS = #{status} WHERE ID = #{id}
+	</update>
+	
+	<!-- 根据合同编码获取推送 ERP 的采购合同主表 -->
+	<select id="getPushErpCght" resultType="cghtBean">
+		SELECT SEQ_INTERFACE.NEXTVAL ID, 
+			   A.HTBM, 
+			   A.HTBH, 
+			   A.HTBC, 
+			   A.HTMC, 
+			   A.JHDD, 
+			   A.XMBM, 
+			   A.HTDJ, 
+			   A.WSCGBZ, 
+			   A.HTZBJ, 
+			   A.HTYFK, 
+			   A.FROMFABZ, 
+			   A.YSFSBM, 
+			   A.CGMSBM, 
+			   A.JHFSBM, 
+			   A.HTZJE, 
+			   A.RMBHV, 
+			   A.ZKJE, 
+			   A.RMBJE, 
+			   TO_CHAR(A.QDSJ, 'YYYYMMDD') QDSJ, 
+			   TO_CHAR(A.SXRQ, 'YYYYMMDD') SXRQ, 
+			   TO_CHAR(A.YXRQ, 'YYYYMMDD') YXRQ, 
+			   A.ZDRBM, 
+			   '1' STATUS, 
+			   (SELECT XM.XMMC FROM XTXMBM XM WHERE A.XMBM = XM.XMBM(+)) XMMC, 
+			   (SELECT D.CORPCODE FROM SINOPEC_CORPCODE D WHERE D.DWBM = SUBSTR(A.DJDWBM, 0, 2)) ZBUKRS, 
+			   SYS_GUID() MSGID, 
+			   A.CMISHTBH, 
+			   (SELECT S.ZBBM FROM TABSUPPLIERINFO S WHERE S.SUPPLIERCODE = A.GFDWBM) ZZBM, 
+			   A.FLAG,
+			   A.SFCG, 
+			   (SELECT A.ZYBM FROM CGQGD A WHERE EXISTS(SELECT 1 FROM CGHTMX B WHERE B.HTBM = #{htbm}) AND ROWNUM = 1) ZEKGRP, 
+	           (SELECT A.WBS FROM CGQGD A WHERE EXISTS(SELECT 1 FROM CGHTMX B WHERE B.HTBM = #{htbm}) AND ROWNUM = 1) WBS
+	      FROM CGHT A
+	     WHERE A.HTBM = #{htbm}
+	</select>
+	
+</mapper>

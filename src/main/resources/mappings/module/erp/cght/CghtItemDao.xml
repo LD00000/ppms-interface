@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunway.ws.module.erp.business.cght.dao.CghtItemDao">
+
+	<!-- 根据主表id，查询采购合同明细接口表数据 -->
+	<select id="queryForListByHeadId" resultType="cghtItemBean">
+		SELECT * 
+		  FROM I_ERP_CGHT_ITEM
+		 WHERE HEAD_ID = #{headId}
+	</select>
+	
+	<!-- 根据合同编码获得推送 ERP 的合同明细 -->
+	<select id="getPushErpCghtItems" resultType="cghtItemBean">
+	SELECT SEQ_INTERFACE.NEXTVAL ID,
+	       A.HTBM,
+	       A.XH,
+	       (SELECT D.QGDH FROM CGQGD D WHERE D.QGDBM = A.QGDBM),
+	       A.QGDMXSUBXH,
+	       A.HTSL,
+	       A.DJ,
+	       A.SLV MWSKZ,
+	       TO_CHAR(A.JHRQ, 'YYYYMMDD') JHRQ,
+	       A.PHSB,
+	       A.WZWH,
+	       A.BZ,
+	       A.DYSM,
+	       A.DZ,
+	       A.SJSL,
+	       (SELECT TB.UNIT_CODE
+	          FROM VIEW_UNIT TB
+	         WHERE TB.UNIT_ID = A.JLDW
+	           AND TB.NLS_ID = B.NLSID
+	           AND EXISTS (SELECT 1
+	                  FROM XTXMBM XM
+	                 WHERE XM.XMBM = B.XMBM
+	                   AND TB.MARIANCODE = XM.MARIANCODE)) ZLDW,
+	       A.RLI_ID,
+	       A.ZZ,
+	       (SELECT TB.WZBM
+	          FROM TB_PLAN_TEMP TB
+	         WHERE TB.CGSQBM = A.FABM
+	           AND ROWNUM = 1) WZBM,
+	       (SELECT TB.WZDMS
+	          FROM T_MV_VM_MARIAN_CLMS TB
+	         WHERE TB.WZBM = A.WZBM
+	           AND EXISTS (SELECT 1
+	                  FROM XTXMBM XM
+	                 WHERE XM.XMBM = B.XMBM
+	                   AND TB.YYMS = B.NLSID
+	                   AND TB.DJDWBM = B.DJDWBM
+	                   AND TB.MARIANCODE = XM.MARIANCODE)) WZMC,
+	       (SELECT TB.GGXH
+	          FROM TB_PLAN_TEMP TB
+	         WHERE TB.CGSQBM = A.FABM
+	           AND ROWNUM = 1) GGXH,
+	       (SELECT TB.UNIT_CODE
+	          FROM VIEW_UNIT TB
+	         WHERE TB.UNIT_ID = A.JLDW
+	           AND TB.MARIANCODE = '2260'
+	           AND TB.NLS_ID = B.NLSID) JLDW,
+	       A.QGDBM,
+	       A.QGDMXXH,
+	       (SELECT TB.IDENT_CODE
+	          FROM T_MV_VM_MARIAN_CLMS TB
+	         WHERE TB.WZBM = A.WZBM
+	           AND TB.YYMS = B.NLSID
+	           AND TB.DJDWBM = B.DJDWBM
+	           AND EXISTS (SELECT 1
+	                  FROM XTXMBM XM
+	                 WHERE XM.XMBM = B.XMBM
+	                   AND TB.MARIANCODE = XM.MARIANCODE)) ZWZBM,
+	       B.JEBZBM,
+	       B.KJXYBH
+	  FROM CGHTMX A, CGHT B
+	 WHERE A.HTBM = B.HTBM
+	   AND A.HTBM = #{htbm}
+	</select>
+	
+</mapper>

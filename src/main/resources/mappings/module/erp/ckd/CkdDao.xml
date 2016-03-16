@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunway.ws.module.erp.business.ckd.dao.CkdDao">
+
+	<!-- 查询要拉取到中间表的数据 -->
+	<select id="queryPullData" resultType="ckdBean">
+		SELECT a.ckdh, a.ckdbc, a.ckddms, a.ckdms, a.xmbm, a.zybm, a.htbm, a.xfdwbm gfdwbm,
+		       a.fhdh, a.fhrm, a.fhrq, a.fph, a.zrcgrbm, a.zrcgrmc, a.zdr, a.zdrm, a.zdrq,
+		       a.zdsm, a.swr, a.swrm, a.swrq, a.swbz, a.tkbz, a.djdwbm bukrs, a.posteddate,
+		       a.marainckdid, a.ztmc, a.kfmc
+		  FROM inter_kcckd a
+		 WHERE flag = '0'
+		   AND a.ckdbc = (SELECT max(b.ckdbc) FROM inter_kcckd b WHERE zdbh = a.zdbh)
+	</select>
+	
+	<update id="updateStatus">
+		UPDATE i_erp_ckd SET status = #{status} WHERE id = #{id}
+	</update>
+	
+	<select id="pullCkd" statementType="CALLABLE">
+		{call PROC_I_ERP_PULL_CKD}
+	</select>
+	
+</mapper>
