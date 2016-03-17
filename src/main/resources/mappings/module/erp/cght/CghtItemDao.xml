@@ -29,16 +29,10 @@
 	          FROM VIEW_UNIT TB
 	         WHERE TB.UNIT_ID = A.JLDW
 	           AND TB.NLS_ID = B.NLSID
-	           AND EXISTS (SELECT 1
-	                  FROM XTXMBM XM
-	                 WHERE XM.XMBM = B.XMBM
-	                   AND TB.MARIANCODE = XM.MARIANCODE)) ZLDW,
+	           AND EXISTS (SELECT 1 FROM XTXMBM XM WHERE XM.XMBM = B.XMBM AND TB.MARIANCODE = XM.MARIANCODE)) ZLDW,
 	       A.RLI_ID,
 	       A.ZZ,
-	       (SELECT TB.WZBM
-	          FROM TB_PLAN_TEMP TB
-	         WHERE TB.CGSQBM = A.FABM
-	           AND ROWNUM = 1) WZBM,
+	       (SELECT TB.WZBM FROM TB_PLAN_TEMP TB WHERE TB.CGSQBM = A.FABM AND ROWNUM = 1) WZBM,
 	       (SELECT TB.WZDMS
 	          FROM T_MV_VM_MARIAN_CLMS TB
 	         WHERE TB.WZBM = A.WZBM
@@ -48,15 +42,7 @@
 	                   AND TB.YYMS = B.NLSID
 	                   AND TB.DJDWBM = B.DJDWBM
 	                   AND TB.MARIANCODE = XM.MARIANCODE)) WZMC,
-	       (SELECT TB.GGXH
-	          FROM TB_PLAN_TEMP TB
-	         WHERE TB.CGSQBM = A.FABM
-	           AND ROWNUM = 1) GGXH,
-	       (SELECT TB.UNIT_CODE
-	          FROM VIEW_UNIT TB
-	         WHERE TB.UNIT_ID = A.JLDW
-	           AND TB.MARIANCODE = '2260'
-	           AND TB.NLS_ID = B.NLSID) JLDW,
+	       (SELECT TB.GGXH FROM TB_PLAN_TEMP TB WHERE TB.CGSQBM = A.FABM AND ROWNUM = 1) GGXH,
 	       A.QGDBM,
 	       A.QGDMXXH,
 	       (SELECT TB.IDENT_CODE
@@ -65,9 +51,11 @@
 	           AND TB.YYMS = B.NLSID
 	           AND TB.DJDWBM = B.DJDWBM
 	           AND EXISTS (SELECT 1
-	                  FROM XTXMBM XM
-	                 WHERE XM.XMBM = B.XMBM
-	                   AND TB.MARIANCODE = XM.MARIANCODE)) ZWZBM,
+                      FROM XTXMBM XM
+                     WHERE XM.XMBM = B.XMBM
+                       AND TB.YYMS = B.NLSID
+                       AND TB.DJDWBM = B.DJDWBM
+                       AND TB.MARIANCODE = XM.MARIANCODE)) ZWZBM,
 	       B.JEBZBM,
 	       B.KJXYBH
 	  FROM CGHTMX A, CGHT B

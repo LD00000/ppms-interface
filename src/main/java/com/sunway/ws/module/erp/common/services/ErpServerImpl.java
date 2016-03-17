@@ -10,11 +10,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sunway.ws.core.cxf.client.JaxwsClient;
+import com.sunway.ws.core.Constants;
+import com.sunway.ws.core.cache.CacheManager;
 import com.sunway.ws.core.exception.ServerException;
-import com.sunway.ws.core.general.GeneralQuery;
 import com.sunway.ws.module.WSInterface;
-import com.sunway.ws.module.common.bean.InterfaceConfigBean;
 import com.sunway.ws.module.erp.business.cght.bean.CghtFdServerBean;
 import com.sunway.ws.module.erp.business.cgjh.bean.CgjhFdServerBean;
 import com.sunway.ws.module.erp.business.cgjh.bean.CgjhMessage;
@@ -49,17 +48,14 @@ public class ErpServerImpl implements ErpServer {
 		
 		List<CgjhMessage> messages = cgjhService.insertCgjh(cgjh);
 		
-		InterfaceConfigBean config = GeneralQuery.getInterfaceConfig(WSInterface.ERP_CGJH_FEEDBACK.getName());
-		if (config == null || "0".equals(config.getEnabled())) {
-			logger.warn("erp_cgjh_feedback 接口未开启或在 i_config 表中无记录...");
+		final Object clientObj = CacheManager.getObject(Constants.CACHE_NAME, WSInterface.ERP_CGJH_FEEDBACK.getName());
+		if (clientObj == null) {
+			logger.warn("{} 接口未开启或在 i_config 表中无记录...", WSInterface.ERP_CGJH_FEEDBACK.getName());
 			return ;
 		}
 		
 		logger.info("发送 ERP 采购计划反馈...");
-		CgjhFeedbackWSInterface client = (CgjhFeedbackWSInterface) new JaxwsClient(config.getAddress(), 
-					   config.getUsername(), 
-					   config.getPassword(), 
-					   CgjhFeedbackWSInterface.class).getClientByJaxWsProxyFactory();
+		CgjhFeedbackWSInterface client = (CgjhFeedbackWSInterface) clientObj;
 		
 		CgjhFdServerBean cgjhFd = new CgjhFdServerBean();
 		cgjhFd.setEsmsghead(new MsgHead());

@@ -13,20 +13,20 @@ import com.sunway.ws.module.common.dao.InterfaceDataStatusDaoImpl;
 /**
  * WebService 消费者
  */
-public class DefaultWSConsumer {
+public class WSDefaultConsumer {
 	
-	private static final Logger logger = LogManager.getLogger(DefaultWSConsumer.class);
+	private static final Logger logger = LogManager.getLogger(WSDefaultConsumer.class);
 	
 	private final InterfaceDataStatusDaoImpl interfaceDataStatusDao = new InterfaceDataStatusDaoImpl();
 	
 	private MessageListener messageListener;
-	private MessageExt message;
+	private MessageExtInner message;
 	private boolean persistLog;	// 是否记录日志
 	private InterfaceDataStatusBean retryDataStatusBean;	// 要重发的数据
 	
-	public DefaultWSConsumer(WSInterface erpInterface) {
-		this.message = new MessageExt();
-		this.message.setErpInterface(erpInterface);
+	public WSDefaultConsumer(WSInterface wsInterface) {
+		this.message = new MessageExtInner();
+		this.message.setErpInterface(wsInterface);
 		this.persistLog = true;
 	}
 	
@@ -38,7 +38,7 @@ public class DefaultWSConsumer {
 	 * @param pkExts	联合主键
 	 * @return
 	 */
-	public DefaultWSConsumer prepareData(Object data, String pk, String... pkExts) {
+	public WSDefaultConsumer prepareData(Object data, String pk, String... pkExts) {
 		this.message.setData(data);
 		this.message.setPk(pk);
 		if (pkExts.length > 0) {
@@ -113,7 +113,7 @@ public class DefaultWSConsumer {
 	 * @param retryDataStatusBean
 	 * @return
 	 */
-	public DefaultWSConsumer retry(InterfaceDataStatusBean retryDataStatusBean) {
+	public WSDefaultConsumer retry(InterfaceDataStatusBean retryDataStatusBean) {
 		this.retryDataStatusBean = retryDataStatusBean;
 		return this;
 	}

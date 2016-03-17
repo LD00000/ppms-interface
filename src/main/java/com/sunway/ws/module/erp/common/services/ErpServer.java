@@ -14,7 +14,7 @@ import com.sunway.ws.module.erp.business.rkd.bean.RkdFdServerBean;
 
 import org.apache.cxf.annotations.WSDLDocumentationCollection;
 
-@WebService
+@WebService(serviceName = "erpServer", targetNamespace="http://services.common.erp.webservice.sunwayworld.com/")
 @WSDLDocumentationCollection({
 	@WSDLDocumentation(value = "ERP2PPMS接口", placement = Placement.TOP),
 	@WSDLDocumentation(value = "ERP2PPMS接口", placement = Placement.SERVICE)

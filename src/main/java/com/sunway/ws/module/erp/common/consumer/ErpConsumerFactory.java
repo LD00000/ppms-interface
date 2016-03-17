@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.sunway.ws.core.Constants;
 import com.sunway.ws.core.cache.CacheManager;
-import com.sunway.ws.core.consumer.DefaultWSConsumer;
-import com.sunway.ws.core.consumer.MessageExt;
+import com.sunway.ws.core.consumer.WSDefaultConsumer;
+import com.sunway.ws.core.consumer.MessageExtInner;
 import com.sunway.ws.core.consumer.MessageListener;
 import com.sunway.ws.module.WSInterface;
 import com.sunway.ws.module.common.DataStatus;
@@ -15,20 +15,20 @@ import com.sunway.ws.module.erp.business.cght.bean.CghtServiceBean;
 
 public class ErpConsumerFactory {
 	
-	private final static Map<WSInterface, DefaultWSConsumer> consumers = new HashMap<WSInterface, DefaultWSConsumer>();
+	private final static Map<WSInterface, WSDefaultConsumer> consumers = new HashMap<WSInterface, WSDefaultConsumer>();
 	
-	public static DefaultWSConsumer getConsumer(WSInterface wsInterface) {
+	public static WSDefaultConsumer getConsumer(WSInterface wsInterface) {
 		if (consumers.get(wsInterface) == null) {
 			synchronized (ErpConsumerFactory.class) {
 				if (consumers.get(wsInterface) == null) {
-					final DefaultWSConsumer consumer = new DefaultWSConsumer(wsInterface);
+					final WSDefaultConsumer consumer = new WSDefaultConsumer(wsInterface);
 					
 					switch (wsInterface) {
 					case ERP_CGHT:
 						consumer.registerListener(new MessageListener() {
 							
 							@Override
-							public DataStatus consumeMessage(MessageExt message) {
+							public DataStatus consumeMessage(MessageExtInner message) {
 								final CghtWSInterface client = 
 										(CghtWSInterface) CacheManager.getObject(Constants.CACHE_NAME, message.getErpInterface().getName());
 								client.siSEGPPMSCAPOCRTREQAOUT((CghtServiceBean) message.getData());
@@ -41,7 +41,7 @@ public class ErpConsumerFactory {
 						consumer.registerListener(new MessageListener() {
 							
 							@Override
-							public DataStatus consumeMessage(MessageExt message) {
+							public DataStatus consumeMessage(MessageExtInner message) {
 								
 								
 								return DataStatus.SUCCESS;

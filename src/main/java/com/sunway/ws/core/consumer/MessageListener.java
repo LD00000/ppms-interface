@@ -10,6 +10,6 @@ public interface MessageListener {
 	 * @param message
 	 * @return 数据状态
 	 */
-	public DataStatus consumeMessage(final MessageExt message);
+	public DataStatus consumeMessage(final MessageExtInner message);
 
 }

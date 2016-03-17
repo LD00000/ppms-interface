@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.sunway.ws.module.WSInterface;
 
-public class MessageExt implements Serializable {
+public class MessageExtInner implements Serializable {
 	
 	private static final long serialVersionUID = -6283681091757863704L;
 
@@ -14,15 +14,15 @@ public class MessageExt implements Serializable {
 	private String pkExt2;
 	private Object data;
 	private Class<?> dataType;
-
-	public WSInterface getErpInterface() {
-		return erpInterface;
-	}
 	
 	public boolean hasData() {
 		return data != null && pk != null;
 	}
 
+	public WSInterface getErpInterface() {
+		return erpInterface;
+	}
+	
 	public void setErpInterface(WSInterface erpInterface) {
 		this.erpInterface = erpInterface;
 	}
