@@ -8,7 +8,7 @@ public class MessageExtInner implements Serializable {
 	
 	private static final long serialVersionUID = -6283681091757863704L;
 
-	private WSInterface erpInterface;
+	private WSInterface wsInterface;
 	private String pk;
 	private String pkExt1;
 	private String pkExt2;
@@ -17,14 +17,6 @@ public class MessageExtInner implements Serializable {
 	
 	public boolean hasData() {
 		return data != null && pk != null;
-	}
-
-	public WSInterface getErpInterface() {
-		return erpInterface;
-	}
-	
-	public void setErpInterface(WSInterface erpInterface) {
-		this.erpInterface = erpInterface;
 	}
 
 	public String getPk() {
@@ -65,6 +57,14 @@ public class MessageExtInner implements Serializable {
 
 	public void setDataType(Class<?> dataType) {
 		this.dataType = dataType;
+	}
+
+	public WSInterface getWsInterface() {
+		return wsInterface;
+	}
+
+	public void setWsInterface(WSInterface wsInterface) {
+		this.wsInterface = wsInterface;
 	}
 	
 }

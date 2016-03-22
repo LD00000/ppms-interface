@@ -15,4 +15,26 @@
 		 WHERE head_id = #{headId}
 	</select>
 	
+	<!-- 根据框架协议编号获得推送 ERP 的框架协议明细 -->
+	<select id="queryPushErpKjxyItems" resultType="kjxyItemBean">
+		SELECT '' ZLINEID,
+		       B.KJXYBH ZECCONH,
+		       A.HXMH ZEBELP,
+		       A.HXMLX ZITEMTYPE,
+		       A.WLXLBM MATKL,
+		       A.WZBM MATNR,
+		       A.WLMC MAKTX,
+		       A.SL KTMNG,
+		       A.JLDW MEINS,
+		       A.ERPJLDW ZMEINS,
+		       A.DJ NETPR,
+		       A.PJJ ZNETPR,
+		       B.ZBBH ZBINUM,
+		       '' ZBIFBNUM,
+		       '' ZBDBZ
+		  FROM KJXYWL A, KJXY B
+		 WHERE A.KJXYBM = B.KJXYBH
+		   AND B.KJXYBH = #{kjxybh}
+	</select>
+	
 </mapper>

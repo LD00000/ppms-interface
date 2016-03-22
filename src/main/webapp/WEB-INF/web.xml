@@ -9,6 +9,12 @@
         <param-value>classpath*:spring-context.xml,classpath*:spring-quartz.xml,classpath*:spring-cxf.xml</param-value>
     </context-param>
     
+    <!-- 使用 spring 生产环境配置 -->
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>produce</param-value>
+    </context-param>
+    
     <filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -1,14 +1,10 @@
 package com.sunway.ws.module.erp.business.rkd.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sunway.ws.module.erp.business.rkd.bean.RkdBean;
-import com.sunway.ws.module.erp.business.rkd.bean.RkdItemBean;
-import com.sunway.ws.module.erp.business.rkd.bean.RkdServerBean;
+import com.sunway.ws.module.erp.business.rkd.bean.RkdServiceBean;
 import com.sunway.ws.module.erp.business.rkd.dao.RkdDao;
 import com.sunway.ws.module.erp.business.rkd.dao.RkdItemDao;
 import com.sunway.ws.module.erp.common.bean.MsgHead;
@@ -22,31 +18,23 @@ public class RkdService {
 	private RkdItemDao rkdItemDao;
 	
 	/**
-	 * 推送 ERP 采购合同创建接口的数据
+	 * 根据制单编号获得推送 ERP 的入库单
 	 * 
+	 * @param zdbh 制单编号
 	 * @return
 	 */
-	public List<RkdServerBean> getPushErpRkd() {
-		List<RkdServerBean> rkdServerBeans = new ArrayList<RkdServerBean>(); 
+	public RkdServiceBean getPushErpRkd(final String zdbh) {
+		final RkdBean rkd = rkdDao.queryPushErpRkd(zdbh);
+		if (rkd == null)
+			return null;
 		
-		RkdBean rkdQ = new RkdBean();
-		rkdQ.setStatus("1");
-		List<RkdBean> rkds = rkdDao.queryForList(rkdQ);
-		for (RkdBean rkd : rkds) {
-			RkdServerBean rkdServerBean = new RkdServerBean();
-			rkdServerBean.setIsmsghead(new MsgHead());
-			
-			// 主表信息
-			rkdServerBean.setIsheader(rkd);
-			
-			// 明细
-			List<RkdItemBean> rkdItems = rkdItemDao.queryForListByHeadId(rkd.getId());
-			rkdServerBean.setItitems(rkdItems);
-			
-			rkdServerBeans.add(rkdServerBean);
-		}
+		final RkdServiceBean rkdServiceBean = new RkdServiceBean();
 		
-		return rkdServerBeans;
+		rkdServiceBean.setIsmsghead(new MsgHead());
+		rkdServiceBean.setIsheader(rkd);
+		rkdServiceBean.setItitems(rkdItemDao.queryPushErpRkdItems(zdbh));
+		
+		return rkdServiceBean;
 	}
 
 }

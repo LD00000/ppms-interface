@@ -24,5 +24,13 @@ public interface CkdDao extends BaseDao<CkdBean> {
 	 */
 	@SelectProvider(type = SelectSqlProvider.class, method = "querySingleTable")
 	public List<CkdBean> queryForList(CkdBean entity);
+	
+	/**
+	 * 根据制单编号获得推送 ERP 的出库单
+	 * 
+	 * @param zdbh
+	 * @return
+	 */
+	public CkdBean queryPushErpCkd(String zdbh);
 
 }

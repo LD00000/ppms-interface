@@ -1,18 +1,11 @@
 package com.sunway.ws.module.erp.business.cght.bean;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-@Table(name = "i_erp_cght")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "zlineid",
@@ -71,10 +64,6 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class CghtBean {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XmlTransient
-	private Long id;
 	@XmlElement(name = "ZLINEID")
     protected String zlineid;
     @XmlElement(name = "MSGID")
@@ -163,38 +152,25 @@ public class CghtBean {
     @XmlElement(name = "FLAG")
     protected String flag;
     @XmlElement(name = "ZMMYL01")
-    @Transient
     protected String zmmyl01;
     @XmlElement(name = "ZMMYL02")
-    @Transient
     protected String zmmyl02;
     @XmlElement(name = "ZMMYL03")
-    @Transient
     protected String zmmyl03;
     @XmlElement(name = "ZMMYL04")
-    @Transient
     protected String zmmyl04;
     @XmlElement(name = "ZMMYL05")
-    @Transient
     protected String zmmyl05;
     @XmlElement(name = "ZMMYL06")
-    @Transient
     protected String zmmyl06;
     @XmlElement(name = "ZMMYL07")
-    @Transient
     protected String zmmyl07;
     @XmlElement(name = "ZMMYL08")
-    @Transient
     protected String zmmyl08;
     @XmlElement(name = "ZMMYL09")
-    @Transient
     protected String zmmyl09;
     @XmlElement(name = "ZMMYL10")
-    @Transient
     protected String zmmyl10;
-    /** 状态（0-待上传 1-上传中 2-已上传 3-上传失败） **/
-    @XmlTransient
-    private String status;
     
 	public String getZlineid() {
 		return zlineid;
@@ -489,18 +465,6 @@ public class CghtBean {
 	}
 	public void setZmmyl10(String zmmyl10) {
 		this.zmmyl10 = zmmyl10;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public String getZekgrp() {
 		return zekgrp;

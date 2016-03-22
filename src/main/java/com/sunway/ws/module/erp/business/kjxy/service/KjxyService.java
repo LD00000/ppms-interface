@@ -1,8 +1,5 @@
 package com.sunway.ws.module.erp.business.kjxy.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,23 +17,24 @@ public class KjxyService {
 	@Autowired
 	private KjxyItemDao kjxyItemDao;
 	
-	public List<KjxyServiceBean> getPushErpKjxy() {
-		List<KjxyServiceBean> kjxyServiceBeans = new ArrayList<KjxyServiceBean>();
+	/**
+	 * 根据框架协议编号获得推送 ERP 的框架协议
+	 * 
+	 * @param kjxybh 框架协议编号
+	 * @return
+	 */
+	public KjxyServiceBean getPushErpKjxy(final String kjxybh) {
+		final KjxyBean kjxy = kjxyDao.queryPushErpKjxy(kjxybh);
+		if (kjxy == null)
+			return null;
 		
-		KjxyBean kjxyQ = new KjxyBean();
-		kjxyQ.setStatus("1");
-		List<KjxyBean> kjxys = kjxyDao.queryForList(kjxyQ);
-		for (KjxyBean kjxy : kjxys) {
-			KjxyServiceBean kjxyService = new KjxyServiceBean();
-			kjxyService.setIsmsghead(new MsgHead());
-			
-			kjxyService.setIsekohead(kjxy);
-			kjxyService.setItekoitem(kjxyItemDao.queryForListByHeadId(kjxy.getId()));
-			
-			kjxyServiceBeans.add(kjxyService);
-		}
+		final KjxyServiceBean kjxyServiceBean = new KjxyServiceBean();
 		
-		return kjxyServiceBeans;
+		kjxyServiceBean.setIsmsghead(new MsgHead());
+		kjxyServiceBean.setIsekohead(kjxy);
+		kjxyServiceBean.setItekoitem(kjxyItemDao.queryPushErpKjxyItems(kjxybh));
+		
+		return kjxyServiceBean;
 	}
 	
 }

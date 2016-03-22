@@ -17,10 +17,6 @@ import org.springframework.core.io.ResourceLoader;
  */
 public class PropertiesLoader {
 	
-	public static void main(String[] args) {
-		System.out.println(PropertiesLoader.getValue("retry.times"));
-	}
-
 	private static final Logger logger = LogManager.getLogger(PropertiesLoader.class);
 
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
@@ -30,7 +26,7 @@ public class PropertiesLoader {
 	public Properties getProperties() {
 		return properties;
 	}
-
+	
 	/**
 	 * 取出Property，但以System的Property优先,取不到返回空字符串.
 	 */

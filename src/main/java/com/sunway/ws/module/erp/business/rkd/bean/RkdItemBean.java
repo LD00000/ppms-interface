@@ -1,7 +1,5 @@
 package com.sunway.ws.module.erp.business.rkd.bean;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.sunway.ws.core.bean.BaseBean;
 
-@Table(name="i_erp_rkd_item")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "zlineid",
@@ -55,9 +52,6 @@ public class RkdItemBean extends BaseBean {
 	@XmlTransient
 	private static final long serialVersionUID = 7297079321578475034L;
 	
-	@Id
-	@XmlTransient
-	private Long id;
 	@XmlElement(name = "ZLINEID")
     protected String zlineid;
     @XmlElement(name = "RKDH")
@@ -126,8 +120,6 @@ public class RkdItemBean extends BaseBean {
     protected String zmmyl09;
     @XmlElement(name = "ZMMYL10")
     protected String zmmyl10;
-    @XmlTransient
-    private Long headId;
     
 	public String getZlineid() {
 		return zlineid;
@@ -332,18 +324,6 @@ public class RkdItemBean extends BaseBean {
 	}
 	public void setZmmyl10(String zmmyl10) {
 		this.zmmyl10 = zmmyl10;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getHeadId() {
-		return headId;
-	}
-	public void setHeadId(Long headId) {
-		this.headId = headId;
 	}
 
 }

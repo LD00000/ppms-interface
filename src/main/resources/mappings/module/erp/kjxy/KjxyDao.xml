@@ -12,4 +12,56 @@
 		UPDATE i_erp_kjxy SET status = #{status} WHERE id = #{id}
 	</update>
 	
+	<!-- 根据框架协议编号获取推送 ERP 的框架协议 -->
+	<select id="queryPushErpKjxy" resultType="kjxyBean">
+		SELECT '' ZLINEID,
+		       SYS_GUID() MSGID,
+		       '' STRN,
+		       (SELECT D.CORPCODE FROM SINOPEC_CORPCODE D WHERE D.DWBM = SUBSTR(B.DJDWBM, 0, 2)) BUKRS,
+		       '' EKORG,
+		       '' EKOTX,
+		       C.QYLX ZQYTYPE,
+		       C.ERPCGZBM EKGRP,
+		       C.ERPCGZMC EKNAM,
+		       C.ERPGCBM WERKS,
+		       A.GYSMC WRNAME1,
+		       (SELECT SUM(W.SL) FROM KJXYWL W WHERE W.KJXYBM = A.KJXYBM GROUP BY W.KJXYBM) ZKTMNG1,
+		       A.XYZE ZKTMNG2,
+		       A.KJXYBH ZECCONH,
+		       A.KJXYMC SAREM,
+		       A.KJXYFABM ZECFWCODE,
+		       A.KJXYQYFS ZECSIGNTYPE,
+		       A.KJXYBBH ZECXYVER,
+		       B.CMISHTBH ZCMISOD,
+		       A.KJXYLX ZBSART,
+		       A.QYDW ZQYDW,
+		       A.QYCS ZQYCS,
+		       TO_CHAR(A.QYRQ, 'YYYYMMDD') AEDAT,
+		       A.QYYH ZQYNAM,
+		       A.GYSBM LIFNR,
+		       A.GYSMC ZGYSNAME,
+		       A.GYSPE ZECLIFNRD,
+		       TO_CHAR(A.YXQKS, 'YYYYMMDD') KDATB,
+		       TO_CHAR(A.YXQJS, 'YYYYMMDD') KDATE,
+		       SYSDATE DASTM,
+		       A.CGFS,
+		       A.ZBBH ZBIFBNUM,
+		       A.CGLX ZPURTY,
+		       A.XYWHCZ ZCARRYTYP,
+		       A.XYFJDZ ZFJURL,
+		       A.BZ ZREMARK,
+		       '' ZECPONUM,
+		       '' ZECPODOCM,
+		       '' MWSKZ,
+		       '' KTWRT,
+		       A.JEBZBM WAERS,
+		       A.JYL ZECFWRATE,
+		       'PPMS' LOGSYS
+		  FROM KJXY A, CGHT B, KJXYZXQY C
+		 WHERE A.KJXYBH = B.KJXYBH
+		   AND A.KJXYBH = C.KJXYBM(+)
+		   AND SUBSTR(B.DJDWBM, 0, 2) = C.ZXQYBM
+		   AND A.KJXYBH = #{kjxybh}
+	</select>
+	
 </mapper>

@@ -24,5 +24,13 @@ public interface LcbDao extends BaseDao<LcbBean> {
 	 */
 	@SelectProvider(type = SelectSqlProvider.class, method = "querySingleTable")
 	public List<LcbBean> queryForList(LcbBean entity);
+	
+	/**
+	 * 根据请购单编码获得推送 ERP 的请购单里程碑
+	 * 
+	 * @param qgdbm
+	 * @return
+	 */
+	public LcbBean queryPushErpLcb(String qgdbm);
 
 }

@@ -24,5 +24,13 @@ public interface RkdDao extends BaseDao<RkdBean> {
 	 */
 	@SelectProvider(type = SelectSqlProvider.class, method = "querySingleTable")
 	public List<RkdBean> queryForList(RkdBean entity);
+	
+	/**
+	 * 根据制单编号获得推送 ERP 的入库单
+	 * 
+	 * @param zdbh
+	 * @return
+	 */
+	public RkdBean queryPushErpRkd(String zdbh);
 
 }

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sunway.ws.core.general.GeneralQuery;
 import com.sunway.ws.module.erp.business.cgjh.bean.CgjhMessage;
-import com.sunway.ws.module.erp.business.cgjh.bean.CgjhServerBean;
+import com.sunway.ws.module.erp.business.cgjh.bean.CgjhServiceBean;
 import com.sunway.ws.module.erp.business.cgjh.dao.CgjhDao;
 import com.sunway.ws.module.erp.business.cgjh.dao.CgjhItemDao;
 import com.sunway.ws.module.erp.business.cgjh.dao.CgjhItemGysDao;
@@ -39,23 +39,23 @@ public class CgjhService {
 	 * @param msg
 	 */
 	@Transactional
-	public List<CgjhMessage> insertCgjh(CgjhServerBean cgjhServerBean) {
+	public List<CgjhMessage> insertCgjh(CgjhServiceBean cgjhServiceBean) {
 		Long headId = GeneralQuery.getDbSeq("SEQ_INTERFACE");
 		
-		cgjhServerBean.getCgjh().setId(headId);
-		cgjhDao.insert(cgjhServerBean.getCgjh());
+		cgjhServiceBean.getCgjh().setId(headId);
+		cgjhDao.insert(cgjhServiceBean.getCgjh());
 		
-		this.addHeadId(cgjhServerBean.getCgjhItems(), headId);
-		this.addHeadId(cgjhServerBean.getCgjhItemGyss(), headId);
-		this.addHeadId(cgjhServerBean.getCgjhItemKjxys(), headId);
-		this.addHeadId(cgjhServerBean.getCgjhItemLcbs(), headId);
-		this.addHeadId(cgjhServerBean.getCgjhItemZfcls(), headId);
+		this.addHeadId(cgjhServiceBean.getCgjhItems(), headId);
+		this.addHeadId(cgjhServiceBean.getCgjhItemGyss(), headId);
+		this.addHeadId(cgjhServiceBean.getCgjhItemKjxys(), headId);
+		this.addHeadId(cgjhServiceBean.getCgjhItemLcbs(), headId);
+		this.addHeadId(cgjhServiceBean.getCgjhItemZfcls(), headId);
 		
-		cgjhItemDao.batchInsert(cgjhServerBean.getCgjhItems());
-		cgjhItemGysDao.batchInsert(cgjhServerBean.getCgjhItemGyss());
-		cgjhItemKjxyDao.batchInsert(cgjhServerBean.getCgjhItemKjxys());
-		cgjhItemLcbDao.batchInsert(cgjhServerBean.getCgjhItemLcbs());
-		cgjhItemZfclDao.batchInsert(cgjhServerBean.getCgjhItemZfcls());
+		cgjhItemDao.batchInsert(cgjhServiceBean.getCgjhItems());
+		cgjhItemGysDao.batchInsert(cgjhServiceBean.getCgjhItemGyss());
+		cgjhItemKjxyDao.batchInsert(cgjhServiceBean.getCgjhItemKjxys());
+		cgjhItemLcbDao.batchInsert(cgjhServiceBean.getCgjhItemLcbs());
+		cgjhItemZfclDao.batchInsert(cgjhServiceBean.getCgjhItemZfcls());
 		
 		CgjhMessage cgjhMessage = new CgjhMessage();
 		cgjhMessage.setType("S");

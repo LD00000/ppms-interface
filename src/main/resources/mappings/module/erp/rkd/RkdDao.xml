@@ -2,23 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunway.ws.module.erp.business.rkd.dao.RkdDao">
 
-	<!-- 查询要拉取到中间表的数据 -->
-	<select id="queryPullData" resultType="rkdBean">
-		SELECT a.rkdh, a.rkdbc, a.rkddms, a.rkdms, a.xmbm, a.zybm, a.htbm, a.gfdwbm,
-		       a.fhdh, a.fhrm, a.fhrq, a.fph, a.zrcgrbm, a.zrcgrmc, a.zdr, a.zdrm, a.zdrq,
-		       a.zdsm, a.swr, a.swrm, a.swrq, a.swbz, a.tkbz, a.djdwbm bukrs, a.posteddate,
-		       a.marainrkdid, a.ztmc, a.kfmc
-		  FROM inter_kcrkd a
-		 WHERE flag = '0'
-		   AND a.rkdbc = (SELECT max(b.rkdbc) FROM inter_kcrkd b WHERE zdbh = a.zdbh)  
-	</select> 
-	
 	<update id="updateStatus">
 		UPDATE i_erp_rkd SET status = #{status} WHERE id = #{id}
 	</update>
 	
 	<select id="pullRkd" statementType="CALLABLE">
 		{call PROC_I_ERP_PULL_RKD}
+	</select>
+	
+	<!-- 根据制单编号获得推送 ERP 的入库单 -->
+	<select id="queryPushErpRkd" resultType="rkdBean">
+		SELECT '' ZLINEID,
+		       A.RKDH,
+		       A.RKDBC,
+		       A.RKDDMS,
+		       A.RKDMS,
+		       A.XMBM,
+		       A.ZYBM,
+		       A.FHDH,
+		       A.FHRM,
+		       TO_CHAR(A.FHRQ, 'YYYYMMDD') FHRQ,
+		       A.FPH,
+		       A.ZRCGRBM,
+		       A.ZRCGRMC,
+		       A.ZDR,
+		       A.ZDRM,
+		       TO_CHAR(A.ZDRQ, 'YYYYMMDD') ZDRQ,
+		       A.ZDSM,
+		       A.SWR,
+		       A.SWRM,
+		       TO_CHAR(A.SWRQ, 'YYYYMMDD') SWRQ,
+		       A.SWBZ,
+		       A.TKBZ,
+		       '' BUKRS,
+		       (SELECT D.CORPCODE FROM SINOPEC_CORPCODE D WHERE D.DWBM = SUBSTR(A.DJDWBM, 0, 2)) ZBUKRS,
+		       TO_CHAR(A.POSTEDDATE, 'YYYYMMDD') POSTEDDATE,
+		       A.MARAINRKDID,
+		       A.ZTMC,
+		       A.HTBC,
+		       A.KFMC,
+		       A.HTBM
+		  FROM INTER_KCRKD A
+		 WHERE A.ZDBH = #{zdbh}
 	</select>
 	
 </mapper>

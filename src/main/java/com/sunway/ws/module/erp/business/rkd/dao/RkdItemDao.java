@@ -18,5 +18,13 @@ public interface RkdItemDao extends BaseDao<RkdItemBean> {
 	public List<RkdItemBean> queryForListByRkdh(String rkdh);
 	
 	public List<RkdItemBean> queryForListByHeadId(Long headId);
+	
+	/**
+	 * 根据制单编号获得推送 ERP 的入库单明细
+	 * 
+	 * @param zdbh
+	 * @return
+	 */
+	public List<RkdItemBean> queryPushErpRkdItems(String zdbh);
 
 }

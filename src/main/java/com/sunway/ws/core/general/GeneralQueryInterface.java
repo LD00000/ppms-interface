@@ -25,7 +25,7 @@ public interface GeneralQueryInterface {
 	 * 
 	 * @return
 	 */
-	@Select("SELECT * FROM I_CONFIG")
+	@Select("SELECT ID, NAME, ADDRESS, METHOD, USERNAME, PASSWORD, TIME, ENABLED, DES FROM I_CONFIG")
 	public List<InterfaceConfigBean> getAllInterfaceConfig();
 	
 	/**

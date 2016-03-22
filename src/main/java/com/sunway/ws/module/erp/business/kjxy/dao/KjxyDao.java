@@ -24,4 +24,12 @@ public interface KjxyDao {
 	@SelectProvider(type = SelectSqlProvider.class, method = "querySingleTable")
 	public List<KjxyBean> queryForList(KjxyBean entity);
 	
+	/**
+	 * 根据框架协议编号获取推送 ERP 的框架协议
+	 * 
+	 * @param kjxybh
+	 * @return
+	 */
+	public KjxyBean queryPushErpKjxy(String kjxybh);
+	
 }

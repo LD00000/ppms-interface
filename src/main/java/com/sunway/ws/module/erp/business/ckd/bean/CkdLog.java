@@ -1,12 +1,8 @@
 package com.sunway.ws.module.erp.business.ckd.bean;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.sunway.ws.core.bean.BaseBean;
 
@@ -16,10 +12,6 @@ public class CkdLog extends BaseBean {
 	@Transient
 	private static final long serialVersionUID = -6081705523693372917L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XmlTransient
-	private Long id;
 	private String zlineid;
 	private String msgid;
 	private String logsys;
@@ -35,12 +27,6 @@ public class CkdLog extends BaseBean {
 	private String type;
 	private String message;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getZlineid() {
 		return zlineid;
 	}

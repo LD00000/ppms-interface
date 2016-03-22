@@ -16,7 +16,11 @@ public enum DataStatus {
 	/**
 	 * 失败(失败次数过多,不重发)
 	 */
-	FAILED_TOO_MANY_TIMES(2);
+	FAILED_TOO_MANY_TIMES(2),
+	/**
+	 * 接口未开启或在 i_config 表中无记录
+	 */
+	WARN_NO_CLIENT(3);
 	
 	private Integer status;
 	

@@ -1,6 +1,5 @@
 package com.sunway.ws.module.erp.business.lcb.bean;
 
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,15 +29,12 @@ import com.sunway.ws.core.bean.BaseBean;
     "zmmyl004",
     "zmmyl005"
 })
-@Table(name="i_erp_lcb")
 public class LcbBean extends BaseBean {
 	
 	@Transient
 	@XmlTransient
 	private static final long serialVersionUID = -8977259829830448604L;
 
-	@XmlTransient
-	private Long id;
 	@XmlElement(name = "ZBUKRS")
     protected String zbukrs;
     @XmlElement(name = "PSPID")
@@ -73,8 +69,6 @@ public class LcbBean extends BaseBean {
     protected String zmmyl004;
     @XmlElement(name = "ZMMYL005")
     protected String zmmyl005;
-    @XmlTransient
-    private String status;
     
 	public String getZbukrs() {
 		return zbukrs;
@@ -177,18 +171,6 @@ public class LcbBean extends BaseBean {
 	}
 	public void setZmmyl005(String zmmyl005) {
 		this.zmmyl005 = zmmyl005;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 }

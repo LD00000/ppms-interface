@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sunway.ws.core.general.GeneralQuery;
 import com.sunway.ws.module.erp.business.cght.bean.CghtFdServerBean;
 import com.sunway.ws.module.erp.business.ckd.bean.CkdFdServerBean;
 import com.sunway.ws.module.erp.business.feedback.bean.ErpLog;
@@ -16,13 +15,9 @@ import com.sunway.ws.module.erp.business.rkd.bean.RkdFdServerBean;
 
 /**
  * erp 反馈接口 service
- * 
- * @author lidong
  */
 @Service
 public class FeedbackService {
-	
-	private static final String SEQNAME = "SEQ_INTERFACE_LOG";	// 序列名
 	
 	private final Gson gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	
@@ -36,7 +31,6 @@ public class FeedbackService {
 	 */
 	public void insertCghtFeedback(CghtFdServerBean cghtFd) {
 		final ErpLog erpLog = new ErpLog();
-		erpLog.setId(GeneralQuery.getDbSeq(SEQNAME));
 		erpLog.setInterfaceName("CghtFeedback");
 		erpLog.setLog(gson.toJson(cghtFd));
 		if (cghtFd.getCghtLogs() != null) {
@@ -55,7 +49,6 @@ public class FeedbackService {
 	 */
 	public void insertRkdFeedback(RkdFdServerBean rkdFd) {
 		final ErpLog erpLog = new ErpLog();
-		erpLog.setId(GeneralQuery.getDbSeq(SEQNAME));
 		erpLog.setInterfaceName("RkdFeedback");
 		erpLog.setLog(gson.toJson(rkdFd));
 		if (rkdFd.getRkdLogs() != null) {
@@ -74,7 +67,6 @@ public class FeedbackService {
 	 */
 	public void insertCkdFeedback(CkdFdServerBean ckdFd) {
 		final ErpLog erpLog = new ErpLog();
-		erpLog.setId(GeneralQuery.getDbSeq(SEQNAME));
 		erpLog.setInterfaceName("CkdFeedback");
 		erpLog.setLog(gson.toJson(ckdFd));
 		if (ckdFd.getCkdLogs() != null) {
@@ -93,7 +85,6 @@ public class FeedbackService {
 	 */
 	public void insertLcbFeedback(LcbFdServiceBean lcbFd) {
 		final ErpLog erpLog = new ErpLog();
-		erpLog.setId(GeneralQuery.getDbSeq(SEQNAME));
 		erpLog.setInterfaceName("LcbFeedback");
 		erpLog.setLog(gson.toJson(lcbFd));
 		if (lcbFd.getMsgHead() != null) {
@@ -112,7 +103,6 @@ public class FeedbackService {
 	 */
 	public void insertKjxyFeedback(KjxyFdServiceBean kjxyFd) {
 		final ErpLog erpLog = new ErpLog();
-		erpLog.setId(GeneralQuery.getDbSeq(SEQNAME));
 		erpLog.setInterfaceName("KjxyFeedback");
 		erpLog.setLog(gson.toJson(kjxyFd));
 		if (kjxyFd.getKjxyLoghs() != null) {

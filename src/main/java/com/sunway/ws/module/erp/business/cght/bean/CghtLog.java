@@ -17,7 +17,6 @@ public class CghtLog extends BaseBean {
 	@XmlTransient
 	private static final long serialVersionUID = -1845883320963272405L;
 
-	private String id;
 	private String zlineid;
 	private String msgid;
 	private String logsys;
@@ -109,12 +108,6 @@ public class CghtLog extends BaseBean {
 	}
 	public void setMessage(String message) {
 		this.message = message;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	
 }

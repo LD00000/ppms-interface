@@ -68,22 +68,14 @@
     	<!-- 注册jobDetail -->
         <property name="jobDetails">  
             <list>  
-                <ref bean="erpCghtJob"/>   
-                <ref bean="erpCkdJob"/>  
-                <ref bean="erpRkdJob"/> 
-                <ref bean="erpLcbJob"/>
-                <ref bean="erpKjxyJob"/> 
+                <ref bean="erpWSRetryJob"/>
             </list>  
         </property>  
         
         <!-- 注册触发器 -->
         <property name="triggers">  
             <list>  
-               <ref bean="erpCghtTrigger"/>   
-               <ref bean="erpCkdTrigger"/>
-               <ref bean="erpRkdTrigger"/>
-               <ref bean="erpLcbTrigger"/>
-               <ref bean="erpKjxyTrigger"/>
+               <ref bean="erpWSRetryTrigger"/>
             </list>  
         </property>  
         
@@ -102,79 +94,19 @@
 	    <property name="concurrent" value="false"/> 
     </bean> --> 
     
-	<bean id="erpCghtJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-	    <property name="jobClass" value="com.sunway.ws.module.erp.common.quartz.ErpCghtJob"/>
+	<bean id="erpWSRetryJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="jobClass" value="com.sunway.ws.module.common.quartz.WSRetryJob"/>
 	    <property name="durability" value="true" /> 
-	    <property name="name" value="erpCghtWebservice_job" />
-	    <property name="group" value="erpCghtWebservice_job_group" />
-	    <property name="description" value="ERP 采购合同推送" />
+	    <property name="name" value="erpWSRetry_job" />
+	    <property name="group" value="erpWSRetry_job_group" />
+	    <property name="description" value="数据重发 job" />
 	</bean>
-    <bean id="erpCghtTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-	    <property name="jobDetail" ref="erpCghtJob"/>
-	    <property name="name" value="erpCghtWebservice_trigger" />
-	    <property name="group" value="erpCghtWebservice_trigger_group" />
-	    <property name="description" value="ERP 采购合同推送" />
-	    <property name="cronExpression" value="*/30 * * * * ?"/>
-	</bean>
-	
-	<bean id="erpCkdJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-	    <property name="jobClass" value="com.sunway.ws.module.erp.common.quartz.ErpCkdJob"/>
-	    <property name="durability" value="true" /> 
-	    <property name="name" value="erpCkdWebservice_job" />
-	    <property name="group" value="erpCkdWebservice_job_group" />
-	    <property name="description" value="ERP 出库单推送" />
-	</bean>
-    <bean id="erpCkdTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-	    <property name="jobDetail" ref="erpCkdJob"/>
-	    <property name="name" value="erpCkdWebservice_trigger" />
-	    <property name="group" value="erpCkdWebservice_trigger_group" />
-	    <property name="description" value="ERP 出库单推送" />
-	    <property name="cronExpression" value="*/30 * * * * ?"/>
-	</bean>
-	
-	<bean id="erpRkdJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-	    <property name="jobClass" value="com.sunway.ws.module.erp.common.quartz.ErpRkdJob"/>
-	    <property name="durability" value="true" /> 
-	    <property name="name" value="erpRkdWebservice_job" />
-	    <property name="group" value="erpRkdWebservice_job_group" />
-	    <property name="description" value="ERP 入库单推送" />
-	</bean>
-    <bean id="erpRkdTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-	    <property name="jobDetail" ref="erpRkdJob"/>
-	    <property name="name" value="erpRkdWebservice_trigger" />
-	    <property name="group" value="erpRkdWebservice_trigger_group" />
-	    <property name="description" value="ERP 入库单推送" />
-	    <property name="cronExpression" value="*/30 * * * * ?"/>
-	</bean>
-	
-	<bean id="erpLcbJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-	    <property name="jobClass" value="com.sunway.ws.module.erp.common.quartz.ErpLcbJob"/>
-	    <property name="durability" value="true" /> 
-	    <property name="name" value="erpLcbWebservice_job" />
-	    <property name="group" value="erpLcbWebservice_job_group" />
-	    <property name="description" value="ERP 里程碑推送" />
-	</bean>
-    <bean id="erpLcbTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-	    <property name="jobDetail" ref="erpLcbJob"/>
-	    <property name="name" value="erpLcbWebservice_trigger" />
-	    <property name="group" value="erpLcbWebservice_trigger_group" />
-	    <property name="description" value="ERP 里程碑推送" />
-	    <property name="cronExpression" value="*/30 * * * * ?"/>
-	</bean>
-	
-	<bean id="erpKjxyJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-	    <property name="jobClass" value="com.sunway.ws.module.erp.common.quartz.ErpKjxyJob"/>
-	    <property name="durability" value="true" /> 
-	    <property name="name" value="erpKjxyWebservice_job" />
-	    <property name="group" value="erpKjxyWebservice_job_group" />
-	    <property name="description" value="ERP 框架协议推送" />
-	</bean>
-    <bean id="erpKjxyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-	    <property name="jobDetail" ref="erpKjxyJob"/>
-	    <property name="name" value="erpKjxyWebservice_trigger" />
-	    <property name="group" value="erpKjxyWebservice_trigger_group" />
-	    <property name="description" value="ERP 框架协议推送" />
-	    <property name="cronExpression" value="*/30 * * * * ?"/>
+    <bean id="erpWSRetryTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	    <property name="jobDetail" ref="erpWSRetryJob"/>
+	    <property name="name" value="erpWSRetry_trigger" />
+	    <property name="group" value="erpWSRetry_trigger_group" />
+	    <property name="description" value="数据重发 job" />
+	    <property name="cronExpression" value="${retry.cron}"/>
 	</bean>
     
 </beans>

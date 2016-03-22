@@ -13,4 +13,12 @@ public interface KjxyItemDao extends BaseDao<KjxyItemBean>{
 	
 	public List<KjxyItemBean> queryForListByHeadId(Long headId);
 	
+	/**
+	 * 根据框架协议编号获得推送 ERP 的框架协议明细
+	 * 
+	 * @param kjxybh
+	 * @return
+	 */
+	public List<KjxyItemBean> queryPushErpKjxyItems(String kjxybh);
+	
 }

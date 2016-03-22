@@ -1,14 +1,10 @@
 package com.sunway.ws.module.erp.business.ckd.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sunway.ws.module.erp.business.ckd.bean.CkdBean;
-import com.sunway.ws.module.erp.business.ckd.bean.CkdItemBean;
-import com.sunway.ws.module.erp.business.ckd.bean.CkdServerBean;
+import com.sunway.ws.module.erp.business.ckd.bean.CkdServiceBean;
 import com.sunway.ws.module.erp.business.ckd.dao.CkdDao;
 import com.sunway.ws.module.erp.business.ckd.dao.CkdItemDao;
 import com.sunway.ws.module.erp.common.bean.MsgHead;
@@ -22,31 +18,22 @@ public class CkdService {
 	private CkdItemDao ckdItemDao;
 	
 	/**
-	 * 推送 ERP 采购合同创建接口的数据
+	 * 根据制单编号获得推送 ERP 的出库单
 	 * 
+	 * @param zdbh 制单编号
 	 * @return
 	 */
-	public List<CkdServerBean> getPushErpCkd() {
-		List<CkdServerBean> ckdServerBeans = new ArrayList<CkdServerBean>(); 
+	public CkdServiceBean getPushErpCkd(final String zdbh) {
+		final CkdBean ckd = ckdDao.queryPushErpCkd(zdbh);
+		if (ckd == null)
+			return null;
 		
-		CkdBean ckdQ = new CkdBean();
-		ckdQ.setStatus("1");
-		List<CkdBean> ckds = ckdDao.queryForList(ckdQ);
-		for (CkdBean ckd : ckds) {
-			CkdServerBean ckdServerBean = new CkdServerBean();
-			ckdServerBean.setIsmsghead(new MsgHead());
-			
-			// 主表信息
-			ckdServerBean.setIsheader(ckd);
-			
-			// 明细
-			List<CkdItemBean> ckdItems = ckdItemDao.queryForListByHeadId(ckd.getId());
-			ckdServerBean.setItitems(ckdItems);
-			
-			ckdServerBeans.add(ckdServerBean);
-		}
+		final CkdServiceBean ckdServiceBean = new CkdServiceBean();
+		ckdServiceBean.setIsmsghead(new MsgHead());
+		ckdServiceBean.setIsheader(ckd);
+		ckdServiceBean.setItitems(ckdItemDao.queryPushErpCkdItems(zdbh));
 		
-		return ckdServerBeans;
+		return ckdServiceBean;
 	}
 
 }

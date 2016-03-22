@@ -1,7 +1,5 @@
 package com.sunway.ws.module.erp.business.cght.bean;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.sunway.ws.core.bean.BaseBean;
 
-@Table(name="i_erp_cght_pay")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "zlineid",
@@ -41,9 +38,6 @@ public class CghtPayBean extends BaseBean {
 	@XmlTransient
 	private static final long serialVersionUID = 8140713554859304205L;
 	
-	@Id
-	@XmlTransient
-	private Long id;
 	@XmlElement(name = "ZLINEID")
     protected String zlineid;
     @XmlElement(name = "HTBM")
@@ -65,37 +59,25 @@ public class CghtPayBean extends BaseBean {
     @XmlElement(name = "ZFFSBM")
     protected String zffsbm;
     @XmlElement(name = "ZMMYL01")
-    @Transient
     protected String zmmyl01;
     @XmlElement(name = "ZMMYL02")
-    @Transient
     protected String zmmyl02;
     @XmlElement(name = "ZMMYL03")
-    @Transient
     protected String zmmyl03;
     @XmlElement(name = "ZMMYL04")
-    @Transient
     protected String zmmyl04;
     @XmlElement(name = "ZMMYL05")
-    @Transient
     protected String zmmyl05;
     @XmlElement(name = "ZMMYL06")
-    @Transient
     protected String zmmyl06;
     @XmlElement(name = "ZMMYL07")
-    @Transient
     protected String zmmyl07;
     @XmlElement(name = "ZMMYL08")
-    @Transient
     protected String zmmyl08;
     @XmlElement(name = "ZMMYL09")
-    @Transient
     protected String zmmyl09;
     @XmlElement(name = "ZMMYL10")
-    @Transient
     protected String zmmyl10;
-    @XmlTransient
-    private Long headId;
     
 	public String getZlineid() {
 		return zlineid;
@@ -211,23 +193,11 @@ public class CghtPayBean extends BaseBean {
 	public void setZmmyl10(String zmmyl10) {
 		this.zmmyl10 = zmmyl10;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getZjhxh() {
 		return zjhxh;
 	}
 	public void setZjhxh(String zjhxh) {
 		this.zjhxh = zjhxh;
-	}
-	public Long getHeadId() {
-		return headId;
-	}
-	public void setHeadId(Long headId) {
-		this.headId = headId;
 	}
 
 }

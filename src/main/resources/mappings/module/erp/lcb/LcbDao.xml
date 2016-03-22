@@ -12,4 +12,22 @@
 		UPDATE i_erp_lcb SET status = #{status} WHERE id = #{id}
 	</update>
 	
+	<!-- 根据请购单编码获得推送 ERP 的请购单里程碑 -->
+	<select id="queryPushErpLcb" resultType="lcbBean">
+		SELECT (SELECT D.CORPCODE FROM SINOPEC_CORPCODE D WHERE D.DWBM = SUBSTR(A.DJDWBM, 0, 2)) ZBUKRS,
+		       A.XMBM PSPID,
+		       A.WBS POSID,
+		       A.QGDBM,
+		       A.QGDH MARIANQGDBM,
+		       '' BANFN,
+		       A.ZYBM ZEKGRP,
+		       A.GSZE GSWRT,
+		       A.ZDRBM ERNAM,
+		       TO_CHAR(A.ZDSJ, 'YYYYMMDD') ERDAT,
+		       '' AENAM,
+		       '' AEDAT
+		  FROM CGQGD A
+		 WHERE A.QGDBM = #{qgdbm}
+	</select>
+	
 </mapper>

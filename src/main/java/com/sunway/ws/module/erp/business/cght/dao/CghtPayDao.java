@@ -23,6 +23,6 @@ public interface CghtPayDao extends BaseDao<CghtPayBean> {
 	 * @param htbm
 	 * @return
 	 */
-	public List<CghtPayBean> getPushErpCghtPays(String htbm);
+	public List<CghtPayBean> queryPushErpCghtPays(String htbm);
 	
 }

@@ -10,23 +10,20 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sunway.ws.core.Constants;
-import com.sunway.ws.core.cache.CacheManager;
-import com.sunway.ws.core.exception.ServerException;
 import com.sunway.ws.module.WSInterface;
 import com.sunway.ws.module.erp.business.cght.bean.CghtFdServerBean;
-import com.sunway.ws.module.erp.business.cgjh.bean.CgjhFdServerBean;
+import com.sunway.ws.module.erp.business.cgjh.bean.CgjhFdServiceBean;
 import com.sunway.ws.module.erp.business.cgjh.bean.CgjhMessage;
-import com.sunway.ws.module.erp.business.cgjh.bean.CgjhServerBean;
+import com.sunway.ws.module.erp.business.cgjh.bean.CgjhServiceBean;
 import com.sunway.ws.module.erp.business.cgjh.service.CgjhService;
 import com.sunway.ws.module.erp.business.ckd.bean.CkdFdServerBean;
-import com.sunway.ws.module.erp.business.feedback.CgjhFeedbackWSInterface;
 import com.sunway.ws.module.erp.business.feedback.service.FeedbackService;
 import com.sunway.ws.module.erp.business.kjxy.bean.KjxyFdServiceBean;
 import com.sunway.ws.module.erp.business.lcb.bean.LcbFdServiceBean;
 import com.sunway.ws.module.erp.business.rkd.bean.RkdFdServerBean;
 import com.sunway.ws.module.erp.common.Validators;
 import com.sunway.ws.module.erp.common.bean.MsgHead;
+import com.sunway.ws.module.erp.common.consumer.ErpConsumerFactory;
 
 @WebService(serviceName = "erpServer", targetNamespace="http://services.common.erp.webservice.sunwayworld.com/")
 @Component(value = "ErpServerImpl")
@@ -36,36 +33,22 @@ public class ErpServerImpl implements ErpServer {
 	
 	@Autowired
 	private CgjhService cgjhService;
-	@Autowired
-	private FeedbackService feedbackService;
+	@Autowired	private FeedbackService feedbackService;
 
 	@WebMethod
 	@Override
-	public void insertCgjh(CgjhServerBean cgjh) {
+	public void insertCgjh(CgjhServiceBean cgjh) {
 		logger.info("插入 ERP 采购计划...");
-		
 		Validators.checkCgjh(cgjh);
-		
 		List<CgjhMessage> messages = cgjhService.insertCgjh(cgjh);
 		
-		final Object clientObj = CacheManager.getObject(Constants.CACHE_NAME, WSInterface.ERP_CGJH_FEEDBACK.getName());
-		if (clientObj == null) {
-			logger.warn("{} 接口未开启或在 i_config 表中无记录...", WSInterface.ERP_CGJH_FEEDBACK.getName());
-			return ;
-		}
-		
-		logger.info("发送 ERP 采购计划反馈...");
-		CgjhFeedbackWSInterface client = (CgjhFeedbackWSInterface) clientObj;
-		
-		CgjhFdServerBean cgjhFd = new CgjhFdServerBean();
+		CgjhFdServiceBean cgjhFd = new CgjhFdServiceBean();
 		cgjhFd.setEsmsghead(new MsgHead());
 		cgjhFd.setEtmessage(messages);
 		
-		try {
-			client.siSEGPPMSCAPRRESPOUT(cgjhFd);
-		} catch (Exception e) {
-			throw new ServerException("调用 erp_cgjh_feedback 失败...", e);
-		}
+		ErpConsumerFactory.getConsumer(WSInterface.ERP_CGJH_FEEDBACK)
+						  .prepareData(cgjhFd, cgjh.getCgjh().getZcgjh())
+						  .run();
 	}
 
 	@Override

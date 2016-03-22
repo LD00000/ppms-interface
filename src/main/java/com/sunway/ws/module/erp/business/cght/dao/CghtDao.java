@@ -31,7 +31,7 @@ public interface CghtDao extends BaseDao<CghtBean> {
 	 * @param htbm 合同编码
 	 * @return
 	 */
-	public CghtBean getPushErpCght(String htbm);
+	public CghtBean queryPushErpCght(String htbm);
 	
 	/**
 	 * 查询多条数据

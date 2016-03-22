@@ -16,7 +16,7 @@ import com.sunway.ws.module.common.bean.InterfaceDataStatusBean;
 public interface InterfaceDataStatusDao {
 	
 	@InsertProvider(type=InsertSqlProvider.class, method="insert")
-	@SelectKey(statement="SELECT SEQ_INTERFACE.NEXTVAL FROM DUAL", before = true, keyProperty = "id", resultType = long.class)
+	@SelectKey(statement="SELECT SEQ_I_DATA_STATUS.NEXTVAL FROM DUAL", before = true, keyProperty = "id", resultType = long.class)
 	public int insert(InterfaceDataStatusBean interfaceDataStatusBean);
 	
 	@Select("SELECT ID, INTERFACE_NAME, B_PK, B_PK_EXT1, B_PK_EXT2, STATUS, RETRY_TIMES, EXCEPTION FROM I_DATA_STATUS WHERE STATUS = 1")

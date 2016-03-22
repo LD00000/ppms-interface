@@ -1,6 +1,5 @@
 package com.sunway.ws.module.erp.business.kjxy.bean;
 
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -36,15 +35,12 @@ import com.sunway.ws.core.bean.BaseBean;
     "zyl7",
     "zyl8"
 })
-@Table(name="i_erp_kjxy_item")
 public class KjxyItemBean extends BaseBean {
 	
 	@Transient
 	@XmlTransient
 	private static final long serialVersionUID = 8706003514050561520L;
 
-	@XmlTransient
-	private Long id;
 	@XmlElement(name = "ZLINEID")
     protected String zlineid;
     @XmlElement(name = "ZECCONH")
@@ -92,12 +88,6 @@ public class KjxyItemBean extends BaseBean {
     @XmlElement(name = "ZYL8")
     protected String zyl8;
     
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getZlineid() {
 		return zlineid;
 	}

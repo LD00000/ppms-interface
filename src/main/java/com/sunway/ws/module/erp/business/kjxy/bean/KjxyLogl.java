@@ -1,6 +1,5 @@
 package com.sunway.ws.module.erp.business.kjxy.bean;
 
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,10 +8,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.sunway.ws.core.bean.BaseBean;
 
-/**
- * erp 接口日志
- */
-@Table(name="i_erp_log")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class KjxyLogl extends BaseBean {
 
@@ -84,11 +79,6 @@ public class KjxyLogl extends BaseBean {
 	}
 	public void setZmmyl03(String zmmyl03) {
 		this.zmmyl03 = zmmyl03;
-	}
-	@Override
-	public String toString() {
-		return "KjxyLogl [zlineid=" + zlineid + ", zebelp=" + zebelp + ", ebelp=" + ebelp + ", zlflag=" + zlflag
-				+ ", zltxt=" + zltxt + ", zmmyl01=" + zmmyl01 + ", zmmyl02=" + zmmyl02 + ", zmmyl03=" + zmmyl03 + "]";
 	}
 
 }

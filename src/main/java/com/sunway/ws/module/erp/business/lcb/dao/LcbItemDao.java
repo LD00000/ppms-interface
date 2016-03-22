@@ -12,5 +12,13 @@ public interface LcbItemDao extends BaseDao<LcbItemBean> {
 	public List<LcbItemBean> queryForListByQgdbm(String qgdbm);
 	
 	public List<LcbItemBean> queryForListByHeadId(Long headId);
+	
+	/**
+	 * 根据请购单编码获得推送 ERP 的请购单里程碑明细
+	 * 
+	 * @param qgdbm
+	 * @return
+	 */
+	public List<LcbItemBean> queryPushErpLcbItems(String qgdbm);
 
 }

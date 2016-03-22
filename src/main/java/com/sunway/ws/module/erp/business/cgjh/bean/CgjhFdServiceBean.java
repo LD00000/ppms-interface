@@ -14,7 +14,7 @@ import com.sunway.ws.module.erp.common.bean.MsgHead;
     "esmsghead",
     "etmessage"
 })
-public class CgjhFdServerBean {
+public class CgjhFdServiceBean {
 
 	@XmlElement(name = "ES_MSG_HEAD")
     protected MsgHead esmsghead;

@@ -15,4 +15,33 @@
 		 WHERE head_id = #{headId}
 	</select>
 	
+	<!-- 根据制单编号获得推送 ERP 的入库单明细 -->
+	<select id="queryPushErpRkdItems" resultType="rkdItemBean">
+		SELECT B.RKDH,
+		       B.RKDBC,
+		       A.XH,
+		       B.HTBM,
+		       '' WZBM,
+		       (SELECT UNIT_CODE FROM VIEW_UNIT U WHERE U.MARIANCODE = '2260' AND UNIT_ID = A.JLDW) JLDW,
+		       A.WZWH,
+		       A.ZDSL,
+		       A.ZDDJ,
+		       A.ZDJE,
+		       A.SLV,
+		       A.SE,
+		       A.YZF,
+		       A.YZFSE,
+		       A.ZF,
+		       A.MXBZ,
+		       A.MARIANRKDMXID,
+		       A.MARIANSMST_ID MARIANSMSTID,
+		       A.MARIANSMST_CODE MARIANSMSTCODE,
+		       A.WZLB,
+		       A.HTMXXH,
+		       A.WBS
+		  FROM INTER_KCRKMX A, INTER_KCRKD B
+		 WHERE A.ZDBH = B.ZDBH
+		   AND A.ZDBH = #{zdbh}
+	</select>
+	
 </mapper>

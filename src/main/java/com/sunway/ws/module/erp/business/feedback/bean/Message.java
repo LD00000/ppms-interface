@@ -1,8 +1,5 @@
 package com.sunway.ws.module.erp.business.feedback.bean;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,11 +12,8 @@ public class Message extends BaseBean {
 	@Transient
 	private static final long serialVersionUID = 978559376548826882L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
 	private String type;
-	private String messageId;
+	private String id;
 	private String number;
 	private String message;
 	private String log_no;
@@ -38,12 +32,6 @@ public class Message extends BaseBean {
 	}
 	public void setType(String type) {
 		this.type = type;
-	}
-	public String getMessageId() {
-		return messageId;
-	}
-	public void setMessageId(String messageId) {
-		this.messageId = messageId;
 	}
 	public String getNumber() {
 		return number;

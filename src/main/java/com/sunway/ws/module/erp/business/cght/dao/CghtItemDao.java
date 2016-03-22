@@ -23,6 +23,6 @@ public interface CghtItemDao extends BaseDao<CghtItemBean> {
 	 * @param htbm 合同编码
 	 * @return
 	 */
-	public List<CghtItemBean> getPushErpCghtItems(String htbm);
+	public List<CghtItemBean> queryPushErpCghtItems(String htbm);
 	
 }

@@ -1,7 +1,5 @@
 package com.sunway.ws.module.erp.business.cght.bean;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.sunway.ws.core.bean.BaseBean;
 
-@Table(name="i_erp_cght_item")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "zlineid",
@@ -66,9 +63,6 @@ public class CghtItemBean extends BaseBean {
 	@XmlTransient
 	private static final long serialVersionUID = -9189487826369373294L;
 	
-	@Id
-	@XmlTransient
-	private Long id;
 	@XmlElement(name = "ZLINEID")
     protected String zlineid;
     @XmlElement(name = "HTBM")
@@ -139,38 +133,26 @@ public class CghtItemBean extends BaseBean {
     private String ppmsqgd;
     @XmlElement(name = "PPMSXH")
     private String ppmsxh;
-    @Transient
     @XmlElement(name = "ZMMYL01")
     protected String zmmyl01;
-    @Transient
     @XmlElement(name = "ZMMYL02")
     protected String zmmyl02;
-    @Transient
     @XmlElement(name = "ZMMYL03")
     protected String zmmyl03;
-    @Transient
     @XmlElement(name = "ZMMYL04")
     protected String zmmyl04;
-    @Transient
     @XmlElement(name = "ZMMYL05")
     protected String zmmyl05;
-    @Transient
     @XmlElement(name = "ZMMYL06")
     protected String zmmyl06;
-    @Transient
     @XmlElement(name = "ZMMYL07")
     protected String zmmyl07;
-    @Transient
     @XmlElement(name = "ZMMYL08")
     protected String zmmyl08;
-    @Transient
     @XmlElement(name = "ZMMYL09")
     protected String zmmyl09;
-    @Transient
     @XmlElement(name = "ZMMYL10")
     protected String zmmyl10;
-    @XmlTransient
-    private Long headId;
     
 	public String getZlineid() {
 		return zlineid;
@@ -441,18 +423,6 @@ public class CghtItemBean extends BaseBean {
 	}
 	public void setQgdms(String qgdms) {
 		this.qgdms = qgdms;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getHeadId() {
-		return headId;
-	}
-	public void setHeadId(Long headId) {
-		this.headId = headId;
 	}
 
 }

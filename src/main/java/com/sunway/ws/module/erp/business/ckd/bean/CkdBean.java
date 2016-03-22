@@ -1,17 +1,13 @@
 package com.sunway.ws.module.erp.business.ckd.bean;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.sunway.ws.core.bean.BaseBean;
 
-@Table(name="i_erp_ckd")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "zlineid",
@@ -63,9 +59,6 @@ public class CkdBean extends BaseBean {
 	@Transient
 	private static final long serialVersionUID = -5646429143625898283L;
 	
-	@Id
-	@XmlTransient
-	private Long id;
 	@XmlElement(name = "ZLINEID")
     protected String zlineid;
     @XmlElement(name = "RKDH")
@@ -152,8 +145,6 @@ public class CkdBean extends BaseBean {
     protected String zmmyl09;
     @XmlElement(name = "ZMMYL10")
     protected String zmmyl10;
-    @XmlTransient
-    private String status;
     
 	public String getZlineid() {
 		return zlineid;
@@ -383,12 +374,6 @@ public class CkdBean extends BaseBean {
 	public void setZmmyl10(String zmmyl10) {
 		this.zmmyl10 = zmmyl10;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 	public String getCkdh() {
 		return ckdh;
 	}
@@ -418,12 +403,6 @@ public class CkdBean extends BaseBean {
 	}
 	public void setZbukrs(String zbukrs) {
 		this.zbukrs = zbukrs;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 }

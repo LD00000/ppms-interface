@@ -6,7 +6,7 @@ import org.apache.cxf.annotations.WSDLDocumentation;
 import org.apache.cxf.annotations.WSDLDocumentation.Placement;
 
 import com.sunway.ws.module.erp.business.cght.bean.CghtFdServerBean;
-import com.sunway.ws.module.erp.business.cgjh.bean.CgjhServerBean;
+import com.sunway.ws.module.erp.business.cgjh.bean.CgjhServiceBean;
 import com.sunway.ws.module.erp.business.ckd.bean.CkdFdServerBean;
 import com.sunway.ws.module.erp.business.kjxy.bean.KjxyFdServiceBean;
 import com.sunway.ws.module.erp.business.lcb.bean.LcbFdServiceBean;
@@ -22,7 +22,7 @@ import org.apache.cxf.annotations.WSDLDocumentationCollection;
 public interface ErpServer {
 
 	@WSDLDocumentation("ERP推送采购计划")
-	public void insertCgjh(CgjhServerBean cgjh);
+	public void insertCgjh(CgjhServiceBean cgjh);
 	@WSDLDocumentation("ERP推送采购合同反馈结果")
 	public void insertCghtFeedback(CghtFdServerBean cghtFd);
 	@WSDLDocumentation("ERP推送入库反馈结果")

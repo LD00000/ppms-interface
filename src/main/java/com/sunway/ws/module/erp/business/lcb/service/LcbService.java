@@ -1,11 +1,7 @@
 package com.sunway.ws.module.erp.business.lcb.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sunway.ws.module.erp.business.lcb.bean.LcbBean;
 import com.sunway.ws.module.erp.business.lcb.bean.LcbServiceBean;
@@ -21,25 +17,24 @@ public class LcbService {
 	@Autowired
 	private LcbItemDao lcbItemDao;
 	
-	@Transactional
-	public List<LcbServiceBean> getPushErpLcb() {
-		List<LcbServiceBean> lcbServiceBeans = new ArrayList<LcbServiceBean>();
+	/**
+	 * 根据请购单编码获得推送 ERP 的里程碑
+	 * 
+	 * @param qgdbm 请购单编码
+	 * @return
+	 */
+	public LcbServiceBean getPushErpLcb(final String qgdbm) {
+		final LcbBean lcb = lcbDao.queryPushErpLcb(qgdbm);
+		if (lcb == null)
+			return null;
 		
-		LcbBean lcbQ = new LcbBean();
-		lcbQ.setStatus("1");
-		List<LcbBean> lcbs = lcbDao.queryForList(lcbQ);
-		for (LcbBean lcb : lcbs) {
-			LcbServiceBean lcbService = new LcbServiceBean();
-			lcbService.setIsmsghead(new MsgHead());
-			
-			lcbService.setIsdochead(lcb);
-			System.out.println("lcb.getId():" + lcb.getId());
-			lcbService.setItdocitem(lcbItemDao.queryForListByHeadId(lcb.getId())); 
-			
-			lcbServiceBeans.add(lcbService);
-		}
+		final LcbServiceBean lcbServiceBean = new LcbServiceBean();
 		
-		return lcbServiceBeans;
+		lcbServiceBean.setIsmsghead(new MsgHead());
+		lcbServiceBean.setIsdochead(lcb);
+		lcbServiceBean.setItdocitem(lcbItemDao.queryPushErpLcbItems(qgdbm));
+		
+		return lcbServiceBean;
 	}
 
 }

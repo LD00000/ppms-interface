@@ -9,11 +9,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.sunway.ws.module.erp.common.bean.MsgHead;
 
-
 /**
  * 发送订单到 ERP bean
- * 
- * @author lidong
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DT_SEG_PPMS_CA_PO_CRT_REQ_OUT", propOrder = {

@@ -19,7 +19,7 @@ import com.sunway.ws.module.erp.common.bean.MsgHead;
 @XmlType(propOrder = {"msgHead", "cgjh", "cgjhItems", "cgjhItemZfcls", "cgjhItemGyss", "cgjhItemKjxys", "cgjhItemLcbs"})
 @WebService  
 @SOAPBinding(style = Style.RPC)  
-public class CgjhServerBean extends BaseBean {
+public class CgjhServiceBean extends BaseBean {
 	
 	@XmlTransient
 	@Transient

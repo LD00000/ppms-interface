@@ -17,6 +17,7 @@ public class InterfaceDataStatusBean {
 	private Integer status;	// 数据发送状态 0-成功 1-失败(会重发) 2-失败(失败次数过多,不重发)
 	private Integer retryTimes;	// 重发次数
 	private String exception;	// 异常
+	private String data;	// 数据对象 json
 	
 	public InterfaceDataStatusBean(String interfaceName) {
 		this.interfaceName = interfaceName;
@@ -71,6 +72,12 @@ public class InterfaceDataStatusBean {
 	}
 	public void setException(String exception) {
 		this.exception = exception;
+	}
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
 	}
 
 }

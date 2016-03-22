@@ -1,5 +1,5 @@
 
-package com.sunway.ws.module.erp.business.ckd.bean;
+package com.sunway.ws.module.erp.business.rkd.bean;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,33 +7,31 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.sunway.ws.core.bean.BaseBean;
 import com.sunway.ws.module.erp.common.bean.MsgHead;
 
 
 /**
- * PPMS��ERP���ϳ������
+ * PPMS��ERP�ɹ��ջ�����
  * 
- * <p>DT_SEG_PPMS_CA_GI_REQ_OUT complex type�� Java �ࡣ
+ * <p>DT_SEG_PPMS_CA_GR_REQ_OUT complex type�� Java �ࡣ
+ * 
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DT_SEG_PPMS_CA_GI_REQ_OUT", propOrder = {
+@XmlType(name = "DT_SEG_PPMS_CA_GR_REQ_OUT", propOrder = {
     "ismsghead",
     "isheader",
     "ititems"
 })
-public class CkdServerBean extends BaseBean {
+public class RkdServiceBean {
 
-	private static final long serialVersionUID = -7609495000920541141L;
-
-	@XmlElement(name = "IS_MSG_HEAD")
+    @XmlElement(name = "IS_MSG_HEAD")
     protected MsgHead ismsghead;
     @XmlElement(name = "IS_HEADER")
-    protected CkdBean isheader;
+    protected RkdBean isheader;
     @XmlElement(name = "IT_ITEMS")
-    protected List<CkdItemBean> ititems;
+    protected List<RkdItemBean> ititems;
     
 	public MsgHead getIsmsghead() {
 		return ismsghead;
@@ -41,16 +39,16 @@ public class CkdServerBean extends BaseBean {
 	public void setIsmsghead(MsgHead ismsghead) {
 		this.ismsghead = ismsghead;
 	}
-	public CkdBean getIsheader() {
+	public RkdBean getIsheader() {
 		return isheader;
 	}
-	public void setIsheader(CkdBean isheader) {
+	public void setIsheader(RkdBean isheader) {
 		this.isheader = isheader;
 	}
-	public List<CkdItemBean> getItitems() {
+	public List<RkdItemBean> getItitems() {
 		return ititems;
 	}
-	public void setItitems(List<CkdItemBean> ititems) {
+	public void setItitems(List<RkdItemBean> ititems) {
 		this.ititems = ititems;
 	}
 

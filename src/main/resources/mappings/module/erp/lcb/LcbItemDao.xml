@@ -15,4 +15,22 @@
 		 WHERE head_id = #{headId}
 	</select>
 	
+	<!-- 根据请购单编码获得推送 ERP 的请购单里程碑明细-->
+	<select id="queryPushErpLcbItems" resultType="lcbItemBean">
+		SELECT A.QGDBM,
+		       A.XH SEQNO,
+		       A.JDBM PMSNO,
+		       B.JDMC PMSMS,
+		       TO_CHAR(A.JHSJ, 'YYYYMMDD') JHKGRQ,
+		       TO_CHAR(A.JHSJ, 'YYYYMMDD') JHWGRQ,
+		       TO_CHAR(A.SJSJ, 'YYYYMMDD') SJKGRQ,
+		       TO_CHAR(A.SJSJ, 'YYYYMMDD') SJWGRQ,
+		       '' ZZBFB,
+		       '' REMARK
+		  FROM CGQGD_ZTGZ A, XTCGQGDORPOZTCODE B
+		 WHERE A.JDBM = B.JDBM
+		   AND B.JDLX = '0'
+		   AND A.QGDBM = #{qgdbm}
+	</select>
+	
 </mapper>

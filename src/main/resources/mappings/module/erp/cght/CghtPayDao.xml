@@ -10,7 +10,7 @@
 	</select>
 	
 	<!-- 根据合同编码获得推送 ERP 的合同付款计划 -->
-	<select id="getPushErpCghtPays" resultType="cghtPayBean">
+	<select id="queryPushErpCghtPays" resultType="cghtPayBean">
 		SELECT A.XH ZLINEID, 
 			   A.HTBM, 
 			   A.XH, 

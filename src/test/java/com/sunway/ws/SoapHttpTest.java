@@ -6,7 +6,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.junit.Test;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 
+@Rollback(true)
+@ActiveProfiles("development")
 public class SoapHttpTest {
 	
 	@Test
