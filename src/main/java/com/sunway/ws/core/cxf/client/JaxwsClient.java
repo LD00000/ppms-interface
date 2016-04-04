@@ -78,9 +78,6 @@ public class JaxwsClient extends ClientConfig {
 	
 	public static <T> void pushByJaxWsProxyFactory(Class<T> wsService, Object client, Object obj) {
 		try {
-			System.out.println(client.getClass());
-			System.out.println(client.getClass().getMethods()[0]);
-			System.out.println(ClassUtils.getOriginalClass(client.getClass()));
 			ClassUtils.getOriginalClass(client.getClass()).getMethods()[0].invoke(client, obj);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

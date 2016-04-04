@@ -19,7 +19,7 @@ public interface InterfaceDataStatusDao {
 	@SelectKey(statement="SELECT SEQ_I_DATA_STATUS.NEXTVAL FROM DUAL", before = true, keyProperty = "id", resultType = long.class)
 	public int insert(InterfaceDataStatusBean interfaceDataStatusBean);
 	
-	@Select("SELECT ID, INTERFACE_NAME, B_PK, B_PK_EXT1, B_PK_EXT2, STATUS, RETRY_TIMES, EXCEPTION FROM I_DATA_STATUS WHERE STATUS = 1")
+	@Select("SELECT * FROM I_DATA_STATUS WHERE STATUS = 1 OR STATUS = 4")
 	public List<InterfaceDataStatusBean> queryRetryData();
 	
 	@UpdateProvider(type=UpdateSqlProvider.class, method="update")

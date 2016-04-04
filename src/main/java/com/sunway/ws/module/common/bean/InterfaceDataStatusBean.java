@@ -1,9 +1,9 @@
 package com.sunway.ws.module.common.bean;
 
+import java.util.Date;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.sunway.ws.module.common.DataStatus;
 
 @Table(name="I_DATA_STATUS")
 public class InterfaceDataStatusBean {
@@ -18,12 +18,8 @@ public class InterfaceDataStatusBean {
 	private Integer retryTimes;	// 重发次数
 	private String exception;	// 异常
 	private String data;	// 数据对象 json
-	
-	public InterfaceDataStatusBean(String interfaceName) {
-		this.interfaceName = interfaceName;
-		this.status = DataStatus.FAILED.getStatus();
-		this.retryTimes = 0;
-	}
+	private String guid;
+	private Date instime;
 	
 	public Long getId() {
 		return id;
@@ -78,6 +74,20 @@ public class InterfaceDataStatusBean {
 	}
 	public void setData(String data) {
 		this.data = data;
+	}
+
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
+	public Date getInstime() {
+		return instime;
+	}
+	public void setInstime(Date instime) {
+		this.instime = instime;
 	}
 
 }

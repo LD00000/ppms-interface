@@ -1,4 +1,6 @@
-package com.sunway.ws.module.erp.common;
+package com.sunway.ws.module.common;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,20 +10,24 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.sunway.ws.module.erp.common.rest.PushDataInterface;
+import com.sunway.ws.module.common.bean.InterfaceDataStatusBean;
+import com.sunway.ws.module.common.dao.InterfaceDataStatusDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:spring-context.xml"})
 @Rollback(true)
 @ActiveProfiles("test")
-public class RestInterfaceTest {
+public class DataStatusTest {
 	
 	@Autowired
-	private PushDataInterface pushDataInterface;
+	private InterfaceDataStatusDao interfaceDataStatusDao;
 	
 	@Test
-	public void interfaceTest() {
-		pushDataInterface.pushCght("201603000017");
+	public void queryTest() {
+		final List<InterfaceDataStatusBean> interfaceDataStatusBeans = interfaceDataStatusDao.queryRetryData();
+		
+		System.out.println(interfaceDataStatusBeans);
+		System.out.println(interfaceDataStatusBeans.size());
 	}
 
 }

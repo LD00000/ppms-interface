@@ -1,4 +1,4 @@
-package com.sunway.ws.test;
+package com.sunway.ws;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

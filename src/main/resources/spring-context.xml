@@ -42,12 +42,6 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	
-	<!-- mybatis test 
-	<bean id="testMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">    
-		<property name="mapperInterface" value="com.sunway.ws.test.MyBatisTest" />   
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-	</bean>  -->
-	
 	<!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
@@ -75,13 +69,19 @@
 		<jee:jndi-lookup id="dataSource" jndi-name="com.sunwayworld.srmDSN" />
 	</beans>
 	
-	<!-- 开发环境配置 -->
-	<beans profile="development">
+	<!-- 测试环境配置 -->
+	<beans profile="test">
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 			<property name="url" value="jdbc:oracle:thin:@10.113.0.21:1521:ppms" />
 			<property name="username" value="ppms_test" />
 			<property name="password" value="ppms" />
 		</bean>
+
+		<!-- mybatis test -->
+		<bean id="testMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+			<property name="mapperInterface" value="com.sunway.ws.mybatistest.MyBatisTestDao" />
+			<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		</bean>  
 	</beans>
 </beans>

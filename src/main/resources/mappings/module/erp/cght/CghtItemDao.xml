@@ -61,7 +61,8 @@
                      WHERE XM.XMBM = B.XMBM
                        AND TB.MARIANCODE = XM.MARIANCODE)) ZWZBM,
 	       B.JEBZBM,
-	       B.KJXYBH
+	       B.KJXYBH,
+	       (SELECT QMX.WBS FROM CGQGDMX QMX WHERE QMX.QGDBM = A.QGDBM AND QMX.XH = A.QGDMXXH) WBS
 	  FROM CGHTMX A, CGHT B
 	 WHERE A.HTBM = B.HTBM
 	   AND A.HTBM = #{htbm}

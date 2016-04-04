@@ -11,7 +11,7 @@
 	
 	<!-- 根据合同编码获得推送 ERP 的合同付款计划 -->
 	<select id="queryPushErpCghtPays" resultType="cghtPayBean">
-		SELECT A.XH ZLINEID, 
+		SELECT A.HTBM || A.XH ZLINEID, 
 			   A.HTBM, 
 			   A.XH, 
 			   A.FKLBBM, 

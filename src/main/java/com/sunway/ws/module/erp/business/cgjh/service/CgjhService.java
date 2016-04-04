@@ -1,6 +1,5 @@
 package com.sunway.ws.module.erp.business.cgjh.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sunway.ws.core.general.GeneralQuery;
-import com.sunway.ws.module.erp.business.cgjh.bean.CgjhMessage;
 import com.sunway.ws.module.erp.business.cgjh.bean.CgjhServiceBean;
 import com.sunway.ws.module.erp.business.cgjh.dao.CgjhDao;
 import com.sunway.ws.module.erp.business.cgjh.dao.CgjhItemDao;
@@ -39,7 +37,7 @@ public class CgjhService {
 	 * @param msg
 	 */
 	@Transactional
-	public List<CgjhMessage> insertCgjh(CgjhServiceBean cgjhServiceBean) {
+	public void insertCgjh(CgjhServiceBean cgjhServiceBean) {
 		Long headId = GeneralQuery.getDbSeq("SEQ_INTERFACE");
 		
 		cgjhServiceBean.getCgjh().setId(headId);
@@ -56,15 +54,6 @@ public class CgjhService {
 		cgjhItemKjxyDao.batchInsert(cgjhServiceBean.getCgjhItemKjxys());
 		cgjhItemLcbDao.batchInsert(cgjhServiceBean.getCgjhItemLcbs());
 		cgjhItemZfclDao.batchInsert(cgjhServiceBean.getCgjhItemZfcls());
-		
-		CgjhMessage cgjhMessage = new CgjhMessage();
-		cgjhMessage.setType("S");
-		cgjhMessage.setMessage("接收成功");
-		
-		List<CgjhMessage> messages = new ArrayList<CgjhMessage>();
-		messages.add(cgjhMessage);
-		
-		return messages;
 	}
 	
 	/**

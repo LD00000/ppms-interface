@@ -2,7 +2,6 @@ package com.sunway.ws.module.erp.common.rest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +11,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sunway.ws.module.WSInterface;
-import com.sunway.ws.module.erp.business.cght.service.CghtService;
-import com.sunway.ws.module.erp.business.ckd.service.CkdService;
-import com.sunway.ws.module.erp.business.kjxy.service.KjxyService;
-import com.sunway.ws.module.erp.business.lcb.service.LcbService;
-import com.sunway.ws.module.erp.business.rkd.service.RkdService;
 import com.sunway.ws.module.erp.common.consumer.ErpConsumerFactory;
 
 /**
@@ -28,17 +22,6 @@ public class PushDataInterface {
 	
 	private static final Logger logger = LogManager.getLogger(PushDataInterface.class);
 	
-	@Autowired
-	private CghtService cghtService;
-	@Autowired
-	private KjxyService kjxyService;
-	@Autowired
-	private CkdService ckdService;
-	@Autowired
-	private RkdService rkdService;
-	@Autowired
-	private LcbService lcbService;
-	
 	/**
 	 * 推送合同
 	 * 
@@ -48,10 +31,9 @@ public class PushDataInterface {
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	@ResponseBody
 	public void pushCght(@RequestBody String htbm) {
-		logger.info("向 ERP 推送合同，合同编码：{}", htbm);
-		
+		logger.info("ERP 接口 准备推送合同...");
 		ErpConsumerFactory.getConsumer(WSInterface.ERP_CGHT)
-						  .prepareData(cghtService.getPushErpCght(htbm), htbm)
+						  .setPk(htbm)
 						  .run();
 	}
 	
@@ -64,10 +46,9 @@ public class PushDataInterface {
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	@ResponseBody
 	public void pushKjxy(@RequestBody String kjxybh) {
-		logger.info("向 ERP 推送框架协议，框架协议编号：{}", kjxybh);
-		
+		logger.info("ERP 接口 准备推送框架协议...");
 		ErpConsumerFactory.getConsumer(WSInterface.ERP_KJXY)
-						  .prepareData(kjxyService.getPushErpKjxy(kjxybh), kjxybh)
+						  .setPk(kjxybh)
 						  .run();
 	}
 	
@@ -80,10 +61,9 @@ public class PushDataInterface {
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	@ResponseBody
 	public void pushCkd(@RequestBody String zdbh) {
-		logger.info("向 ERP 推送出库单，制单编号：{}", zdbh);
-		
+		logger.info("ERP 接口 准备推送出库单...");
 		ErpConsumerFactory.getConsumer(WSInterface.ERP_CKD)
-						  .prepareData(ckdService.getPushErpCkd(zdbh), zdbh)
+						  .setPk(zdbh)
 						  .run();
 	}
 	
@@ -96,10 +76,9 @@ public class PushDataInterface {
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	@ResponseBody
 	public void pushRkd(@RequestBody String zdbh) {
-		logger.info("向 ERP 推送入库单，制单编号：{}", zdbh);
-		
+		logger.info("ERP 接口 准备推送入库单...");
 		ErpConsumerFactory.getConsumer(WSInterface.ERP_RKD)
-						  .prepareData(rkdService.getPushErpRkd(zdbh), zdbh)
+						  .setPk(zdbh)
 						  .run();
 	}
 	
@@ -112,10 +91,9 @@ public class PushDataInterface {
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	@ResponseBody
 	public void pushLcb(@RequestBody String qgdbm) {
-		logger.info("向 ERP 推送里程碑，请购单编码：{}", qgdbm);
-		
+		logger.info("ERP 接口 准备推送里程碑...");
 		ErpConsumerFactory.getConsumer(WSInterface.ERP_LCB)
-						  .prepareData(lcbService.getPushErpLcb(qgdbm), qgdbm)
+			  			  .setPk(qgdbm)
 						  .run();
 	}
 

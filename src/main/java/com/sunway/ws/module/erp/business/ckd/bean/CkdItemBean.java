@@ -22,6 +22,7 @@ import com.sunway.ws.core.bean.BaseBean;
     "jldw",
     "wzwh",
     "zdsl",
+    "kcdd",
     "zddj",
     "zdje",
     "waers",
@@ -74,6 +75,8 @@ public class CkdItemBean extends BaseBean {
     protected String wzwh;
     @XmlElement(name = "ZDSL")
     protected String zdsl;
+    @XmlElement(name = "KCDD")
+    protected String kcdd;
     @XmlElement(name = "ZDDJ")
     protected String zddj;
     @XmlElement(name = "ZDJE")
@@ -324,6 +327,12 @@ public class CkdItemBean extends BaseBean {
 	}
 	public void setCkdbc(String ckdbc) {
 		this.ckdbc = ckdbc;
+	}
+	public String getKcdd() {
+		return kcdd;
+	}
+	public void setKcdd(String kcdd) {
+		this.kcdd = kcdd;
 	}
 
 }

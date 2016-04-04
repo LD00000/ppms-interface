@@ -14,6 +14,7 @@ import com.sunway.ws.core.bean.BaseBean;
     "zlineid",
     "htbm",
     "xh",
+    "wbs",
     "qgdbm",
     "qgdxh",
     "qgdms",
@@ -69,6 +70,8 @@ public class CghtItemBean extends BaseBean {
     protected String htbm;
     @XmlElement(name = "XH")
     protected String xh;
+    @XmlElement(name = "WBS")
+    protected String wbs;
     @XmlElement(name = "WZBM")
     protected String wzbm;
     @XmlElement(name = "ZWZBM")
@@ -423,6 +426,12 @@ public class CghtItemBean extends BaseBean {
 	}
 	public void setQgdms(String qgdms) {
 		this.qgdms = qgdms;
+	}
+	public String getWbs() {
+		return wbs;
+	}
+	public void setWbs(String wbs) {
+		this.wbs = wbs;
 	}
 
 }

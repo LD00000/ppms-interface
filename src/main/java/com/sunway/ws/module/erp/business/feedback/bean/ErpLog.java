@@ -18,7 +18,8 @@ public class ErpLog extends BaseBean {
 	@Id
 	private long id;
 	private String interfaceName;
-	private String msgid;
+	private String guid;
+	private String status;
 	private String log;
 	
 	public long getId() {
@@ -33,17 +34,23 @@ public class ErpLog extends BaseBean {
 	public void setInterfaceName(String interfaceName) {
 		this.interfaceName = interfaceName;
 	}
-	public String getMsgid() {
-		return msgid;
-	}
-	public void setMsgid(String msgid) {
-		this.msgid = msgid;
-	}
 	public String getLog() {
 		return log;
 	}
 	public void setLog(String log) {
 		this.log = log;
+	}
+	public String getGuid() {
+		return guid;
+	}
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

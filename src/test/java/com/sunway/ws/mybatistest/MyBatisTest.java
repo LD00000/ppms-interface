@@ -1,4 +1,4 @@
-package com.sunway.ws.module.erp.common;
+package com.sunway.ws.mybatistest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,20 +8,18 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.sunway.ws.module.erp.common.rest.PushDataInterface;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:spring-context.xml"})
 @Rollback(true)
 @ActiveProfiles("test")
-public class RestInterfaceTest {
+public class MyBatisTest {
 	
 	@Autowired
-	private PushDataInterface pushDataInterface;
+	private MyBatisTestDao myBatisTestDao;
 	
 	@Test
-	public void interfaceTest() {
-		pushDataInterface.pushCght("201603000017");
+	public void mTest() {
+		myBatisTestDao.queryDual("1");
 	}
 
 }

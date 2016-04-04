@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.sunway.ws.core.bean.BaseBean;
+import com.sunway.ws.core.utils.DateUtils;
 import com.sunway.ws.core.utils.IdGen;
 
 /**
@@ -48,7 +49,7 @@ public class MsgHead extends BaseBean {
 		this.setMandt("ECC6.0");
 		this.setGuid(IdGen.uuid());
 		this.setSystemId("PPMS");
-		this.setSendtime((new Date()).toString());
+		this.setSendtime(DateUtils.formatDateTime(new Date()));
 	}
 	
 	public String getMsgheadid() {

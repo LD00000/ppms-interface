@@ -8,6 +8,7 @@ import com.sunway.ws.module.erp.business.cght.bean.CghtServiceBean;
 import com.sunway.ws.module.erp.business.cght.dao.CghtDao;
 import com.sunway.ws.module.erp.business.cght.dao.CghtItemDao;
 import com.sunway.ws.module.erp.business.cght.dao.CghtPayDao;
+import com.sunway.ws.module.erp.business.cght.dao.CghtQtfyDao;
 import com.sunway.ws.module.erp.common.bean.MsgHead;
 
 /**
@@ -22,6 +23,8 @@ public class CghtService {
 	private CghtItemDao cghtItemDao;
 	@Autowired
 	private CghtPayDao cghtPayDao;
+	@Autowired
+	private CghtQtfyDao cghtQtfyDao;
 	
 	/**
 	 * 根据合同编码获得推送 ERP 的采购合同
@@ -40,6 +43,7 @@ public class CghtService {
 		cghtServiceBean.setIsheader(cght);
 		cghtServiceBean.setItitems(cghtItemDao.queryPushErpCghtItems(htbm));
 		cghtServiceBean.setItpay(cghtPayDao.queryPushErpCghtPays(htbm));
+		cghtServiceBean.setCghtQtfy(cghtQtfyDao.queryPushErpCghtQtfys(htbm));
 		
 		return cghtServiceBean;
 	}

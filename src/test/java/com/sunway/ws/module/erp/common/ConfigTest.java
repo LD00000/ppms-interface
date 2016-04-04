@@ -16,7 +16,7 @@ import com.sunway.ws.module.common.bean.InterfaceConfigBean;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:spring-context.xml"})
 @Rollback(true)
-@ActiveProfiles("development")
+@ActiveProfiles("test")
 public class ConfigTest {
 
 	@Test

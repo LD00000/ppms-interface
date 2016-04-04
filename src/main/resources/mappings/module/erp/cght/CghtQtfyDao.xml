@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunway.ws.module.erp.business.cght.dao.CghtQtfyDao">
+	
+	<!-- 根据合同编码获得推送 ERP 的合同其他费用 -->
+	<select id="queryPushErpCghtQtfys" resultType="cghtQtfyBean">
+		SELECT A.HTBM || A.XH ZLINEID, 
+		       A.HTBM,
+		       A.XH,
+		       A.FYLXBM,
+		       A.FYJE,
+		       A.BZ 
+		  FROM CGHTQTFY A
+		 WHERE A.HTBM = #{htbm}
+	</select>
+	
+</mapper>

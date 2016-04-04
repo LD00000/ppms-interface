@@ -19,7 +19,7 @@
 	<!-- jax-ws 
 		  如果使用 spring 注解, implementor 的值需要设置成 #实现类的类名, 相应实现类要加@component注解，否则 spring 注解会失效 -->
 	<jaxws:endpoint id="erpserver" address="/erp" implementor="#ErpServerImpl">
-		<jaxws:inInterceptors>
+		<!-- <jaxws:inInterceptors>
 			<bean id="inInterceprot" class="com.sunway.ws.core.cxf.HttpInInterceptor">
 				<property name="type" value="service"/>
 				<property name="interfaceName" value="erpServerImpl"/>
@@ -30,7 +30,7 @@
 				<property name="type" value="service"/>
 				<property name="interfaceName" value="erpServerImpl"/>
 			</bean>
-		</jaxws:outInterceptors>
+		</jaxws:outInterceptors> -->
 	</jaxws:endpoint>
 	
 </beans>

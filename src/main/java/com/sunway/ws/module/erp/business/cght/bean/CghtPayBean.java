@@ -14,7 +14,6 @@ import com.sunway.ws.core.bean.BaseBean;
     "zlineid",
     "htbm",
     "xh",
-    "zjhxh",
     "fklbbm",
     "fkje",
     "jhfkrq",
@@ -44,8 +43,6 @@ public class CghtPayBean extends BaseBean {
     protected String htbm;
     @XmlElement(name = "XH")
     protected String xh;
-    @XmlElement(name = "ZJHXH")
-    protected String zjhxh;
     @XmlElement(name = "FKLBBM")
     protected String fklbbm;
     @XmlElement(name = "FKJE")
@@ -192,12 +189,6 @@ public class CghtPayBean extends BaseBean {
 	}
 	public void setZmmyl10(String zmmyl10) {
 		this.zmmyl10 = zmmyl10;
-	}
-	public String getZjhxh() {
-		return zjhxh;
-	}
-	public void setZjhxh(String zjhxh) {
-		this.zjhxh = zjhxh;
 	}
 
 }

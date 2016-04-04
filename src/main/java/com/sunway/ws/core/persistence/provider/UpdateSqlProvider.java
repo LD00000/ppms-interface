@@ -55,8 +55,8 @@ public class UpdateSqlProvider<T> extends MapperTemplate<T> {
 			}
 			
 			sql.SET(StringUtils.camelhumpToUnderline(propertyName) + " = " + "#{"+ propertyName +"}");
-			sql.WHERE("ID = ${id}");
 		}
+		sql.WHERE("ID = #{id}");
 		
 		return sql.toString();
 	}

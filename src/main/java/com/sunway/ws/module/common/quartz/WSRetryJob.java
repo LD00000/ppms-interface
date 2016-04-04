@@ -17,6 +17,10 @@ import com.sunway.ws.module.common.bean.InterfaceDataStatusBean;
 import com.sunway.ws.module.common.dao.InterfaceDataStatusDao;
 import com.sunway.ws.module.erp.common.consumer.ErpConsumerFactory;
 
+/**
+ * 重发数据 job</br>
+ * 每次运行会从配置文件读取cron参数，并更新
+ */
 @DisallowConcurrentExecution
 public class WSRetryJob extends QuartzJobBean {
 	
@@ -31,16 +35,21 @@ public class WSRetryJob extends QuartzJobBean {
 		
 		QuartzManager.updateCronExpression(context, PropertiesLoader.getProperty("retry.cron"));
 		
-		final List<InterfaceDataStatusBean> interfaceDataStatusBeans = interfaceDataStatusDao.queryRetryData();
-		
-		logger.info("需重发数据条数：{}", interfaceDataStatusBeans.size());
-		
-		for (InterfaceDataStatusBean interfaceDataStatusBean : interfaceDataStatusBeans) {
-			final WSInterface wsInterface = WSInterface.valueOf(interfaceDataStatusBean.getInterfaceName());
+		try {
+			final List<InterfaceDataStatusBean> interfaceDataStatusBeans = interfaceDataStatusDao.queryRetryData();
 			
-			ErpConsumerFactory.getConsumer(wsInterface)
-							  .retry(interfaceDataStatusBean, wsInterface.getServiceBeanClazz())
-							  .run();
+			logger.info("需重发数据条数：{}", interfaceDataStatusBeans.size());
+			
+			for (InterfaceDataStatusBean interfaceDataStatusBean : interfaceDataStatusBeans) {
+				logger.info("重发数据...");
+				final WSInterface wsInterface = WSInterface.valueOf(interfaceDataStatusBean.getInterfaceName());
+				
+				ErpConsumerFactory.getConsumer(wsInterface)
+								  .retry(interfaceDataStatusBean, wsInterface.getServiceBeanClazz())
+								  .run();
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 

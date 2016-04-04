@@ -19,7 +19,7 @@ import com.sunway.ws.module.erp.business.rkd.bean.RkdFdServerBean;
 @Service
 public class FeedbackService {
 	
-	private final Gson gson = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+	private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	
 	@Autowired
 	private ErpLogDao erpLogDao;
@@ -33,11 +33,12 @@ public class FeedbackService {
 		final ErpLog erpLog = new ErpLog();
 		erpLog.setInterfaceName("CghtFeedback");
 		erpLog.setLog(gson.toJson(cghtFd));
-		if (cghtFd.getCghtLogs() != null) {
-			erpLog.setMsgid(cghtFd.getCghtLogs().get(0).getMsgid());
-		} else {
-			erpLog.setMsgid("null");
+		if (cghtFd != null && cghtFd.getMsgHead() != null)
+			erpLog.setGuid(cghtFd.getMsgHead().getGuid());
+		if (cghtFd.getCghtLogs() != null && cghtFd.getCghtLogs().size() != 0) {
+			erpLog.setStatus("S".equals(cghtFd.getCghtLogs().get(0).getType()) ? "0" : "1");
 		}
+		
 		
 		erpLogDao.insert(erpLog);
 	}
@@ -51,10 +52,10 @@ public class FeedbackService {
 		final ErpLog erpLog = new ErpLog();
 		erpLog.setInterfaceName("RkdFeedback");
 		erpLog.setLog(gson.toJson(rkdFd));
-		if (rkdFd.getRkdLogs() != null) {
-			erpLog.setMsgid(rkdFd.getRkdLogs().get(0).getMsgid());
-		} else {
-			erpLog.setMsgid("null");
+		if (rkdFd != null && rkdFd.getMsgHead() != null)
+			erpLog.setGuid(rkdFd.getMsgHead().getGuid());
+		if (rkdFd.getRkdLogs() != null && rkdFd.getRkdLogs().size() != 0) {
+			erpLog.setStatus("S".equals(rkdFd.getRkdLogs().get(0).getType()) ? "0" : "1");
 		}
 		
 		erpLogDao.insert(erpLog);
@@ -69,10 +70,10 @@ public class FeedbackService {
 		final ErpLog erpLog = new ErpLog();
 		erpLog.setInterfaceName("CkdFeedback");
 		erpLog.setLog(gson.toJson(ckdFd));
-		if (ckdFd.getCkdLogs() != null) {
-			erpLog.setMsgid(ckdFd.getCkdLogs().get(0).getMsgid());
-		} else {
-			erpLog.setMsgid("null");
+		if (ckdFd != null && ckdFd.getMsgHead() != null)
+			erpLog.setGuid(ckdFd.getMsgHead().getGuid());
+		if (ckdFd.getCkdLogs() != null && ckdFd.getCkdLogs().size() != 0) {
+			erpLog.setStatus("S".equals(ckdFd.getCkdLogs().get(0).getType()) ? "0" : "1");
 		}
 		
 		erpLogDao.insert(erpLog);
@@ -87,10 +88,10 @@ public class FeedbackService {
 		final ErpLog erpLog = new ErpLog();
 		erpLog.setInterfaceName("LcbFeedback");
 		erpLog.setLog(gson.toJson(lcbFd));
-		if (lcbFd.getMsgHead() != null) {
-			erpLog.setMsgid(lcbFd.getMsgHead().getGuid());
-		} else {
-			erpLog.setMsgid("null");
+		if (lcbFd != null && lcbFd.getMsgHead() != null)
+			erpLog.setGuid(lcbFd.getMsgHead().getGuid());
+		if (lcbFd.getLcbLogs() != null && lcbFd.getLcbLogs().size() != 0) {
+			erpLog.setStatus("S".equals(lcbFd.getLcbLogs().get(0).getType()) ? "0" : "1");
 		}
 		
 		erpLogDao.insert(erpLog);
@@ -105,10 +106,10 @@ public class FeedbackService {
 		final ErpLog erpLog = new ErpLog();
 		erpLog.setInterfaceName("KjxyFeedback");
 		erpLog.setLog(gson.toJson(kjxyFd));
-		if (kjxyFd.getKjxyLoghs() != null) {
-			erpLog.setMsgid(kjxyFd.getKjxyLoghs().get(0).getMsgid());
-		} else {
-			erpLog.setMsgid("null");
+		if (kjxyFd != null && kjxyFd.getMsgHead() != null)
+			erpLog.setGuid(kjxyFd.getMsgHead().getGuid());
+		if (kjxyFd.getKjxyLoghs() != null && kjxyFd.getKjxyLoghs().size() != 0) {
+			erpLog.setStatus(kjxyFd.getKjxyLoghs().get(0).getFlag());
 		}
 		
 		erpLogDao.insert(erpLog);

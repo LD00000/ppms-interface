@@ -12,6 +12,9 @@ import javax.xml.bind.annotation.XmlType;
     "msgid",
     "logsys",
     "htbm",
+    "flag",
+    "sfcg",
+    "ywlxbz",
     "stats",
     "htbh",
     "htbc",
@@ -20,7 +23,6 @@ import javax.xml.bind.annotation.XmlType;
     "htlx",
     "wzmc",
     "jhdd",
-    "wbs",
     "xmbm",
     "xmmc",
     "htdj",
@@ -46,8 +48,6 @@ import javax.xml.bind.annotation.XmlType;
     "ekgrp",
     "werks",
     "zzbm",
-    "sfcg",
-    "flag",
     "cmisod",
     "zbukrs",
     "zekgrp",
@@ -89,8 +89,6 @@ public class CghtBean {
     protected String wzmc;
     @XmlElement(name = "JHDD")
     protected String jhdd;
-    @XmlElement(name = "WBS")
-    protected String wbs;
     @XmlElement(name = "XMBM")
     protected String xmbm;
     @XmlElement(name = "XMMC")
@@ -151,6 +149,8 @@ public class CghtBean {
     protected String sfcg;
     @XmlElement(name = "FLAG")
     protected String flag;
+    @XmlElement(name = "YWLXBZ")
+    protected String ywlxbz;
     @XmlElement(name = "ZMMYL01")
     protected String zmmyl01;
     @XmlElement(name = "ZMMYL02")
@@ -243,12 +243,6 @@ public class CghtBean {
 	}
 	public void setJhdd(String jhdd) {
 		this.jhdd = jhdd;
-	}
-	public String getWbs() {
-		return wbs;
-	}
-	public void setWbs(String wbs) {
-		this.wbs = wbs;
 	}
 	public String getXmbm() {
 		return xmbm;
@@ -489,6 +483,12 @@ public class CghtBean {
 	}
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+	public String getYwlxbz() {
+		return ywlxbz;
+	}
+	public void setYwlxbz(String ywlxbz) {
+		this.ywlxbz = ywlxbz;
 	}
 	
 }

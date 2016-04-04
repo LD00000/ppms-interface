@@ -15,7 +15,6 @@
 	<!-- 根据框架协议编号获取推送 ERP 的框架协议 -->
 	<select id="queryPushErpKjxy" resultType="kjxyBean">
 		SELECT '' ZLINEID,
-		       SYS_GUID() MSGID,
 		       '' STRN,
 		       (SELECT D.CORPCODE FROM SINOPEC_CORPCODE D WHERE D.DWBM = SUBSTR(B.DJDWBM, 0, 2)) BUKRS,
 		       '' EKORG,
@@ -55,8 +54,7 @@
 		       '' MWSKZ,
 		       '' KTWRT,
 		       A.JEBZBM WAERS,
-		       A.JYL ZECFWRATE,
-		       'PPMS' LOGSYS
+		       A.JYL ZECFWRATE
 		  FROM KJXY A, CGHT B, KJXYZXQY C
 		 WHERE A.KJXYBH = B.KJXYBH
 		   AND A.KJXYBH = C.KJXYBM(+)

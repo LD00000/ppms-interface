@@ -22,7 +22,11 @@
 		       A.XH,
 		       B.HTBM,
 		       '' WZBM,
-		       (SELECT UNIT_CODE FROM VIEW_UNIT U WHERE U.MARIANCODE = '2260' AND UNIT_ID = A.JLDW) JLDW,
+		       (SELECT TB.UNIT_CODE
+		          FROM VIEW_UNIT TB
+		         WHERE TB.UNIT_ID = A.JLDW
+		           AND TB.NLS_ID = B.NLSID
+		           AND EXISTS (SELECT 1 FROM XTXMBM XM WHERE XM.XMBM = B.XMBM AND TB.MARIANCODE = XM.MARIANCODE)) JLDW,
 		       A.WZWH,
 		       A.ZDSL,
 		       A.ZDDJ,

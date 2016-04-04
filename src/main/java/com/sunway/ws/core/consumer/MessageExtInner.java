@@ -14,9 +14,21 @@ public class MessageExtInner implements Serializable {
 	private String pkExt2;
 	private Object data;
 	private Class<?> dataType;
+	private String guid;
+	
+	public MessageExtInner(WSInterface wsInterface, Object data, String guid) {
+		this.wsInterface = wsInterface;
+		this.data = data;
+		this.guid = guid;
+	}
+	
+	public MessageExtInner(WSInterface wsInterface, Object data) {
+		this.wsInterface = wsInterface;
+		this.data = data;
+	}
 	
 	public boolean hasData() {
-		return data != null && pk != null;
+		return data != null || pk != null;
 	}
 
 	public String getPk() {
@@ -65,6 +77,14 @@ public class MessageExtInner implements Serializable {
 
 	public void setWsInterface(WSInterface wsInterface) {
 		this.wsInterface = wsInterface;
+	}
+
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.sunway.ws.module.erp.common.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -21,8 +22,6 @@ import com.sunway.ws.module.erp.business.feedback.service.FeedbackService;
 import com.sunway.ws.module.erp.business.kjxy.bean.KjxyFdServiceBean;
 import com.sunway.ws.module.erp.business.lcb.bean.LcbFdServiceBean;
 import com.sunway.ws.module.erp.business.rkd.bean.RkdFdServerBean;
-import com.sunway.ws.module.erp.common.Validators;
-import com.sunway.ws.module.erp.common.bean.MsgHead;
 import com.sunway.ws.module.erp.common.consumer.ErpConsumerFactory;
 
 @WebService(serviceName = "erpServer", targetNamespace="http://services.common.erp.webservice.sunwayworld.com/")
@@ -33,21 +32,36 @@ public class ErpServerImpl implements ErpServer {
 	
 	@Autowired
 	private CgjhService cgjhService;
-	@Autowired	private FeedbackService feedbackService;
+	@Autowired	
+	private FeedbackService feedbackService;
 
 	@WebMethod
 	@Override
 	public void insertCgjh(CgjhServiceBean cgjh) {
 		logger.info("插入 ERP 采购计划...");
-		Validators.checkCgjh(cgjh);
-		List<CgjhMessage> messages = cgjhService.insertCgjh(cgjh);
+		
+		CgjhMessage cgjhMessage = new CgjhMessage();
+		cgjhMessage.setNumber(cgjh.getCgjh().getZcgjh());
+		cgjhMessage.setType("E");
+		cgjhMessage.setMessage("接收失败");
+		
+		try {
+			cgjhService.insertCgjh(cgjh);
+			cgjhMessage.setType("S");
+			cgjhMessage.setMessage("接收成功");
+		} catch (Exception e) {
+			logger.error(e);
+			cgjhMessage.setMessage(e.getMessage());
+		}
 		
 		CgjhFdServiceBean cgjhFd = new CgjhFdServiceBean();
-		cgjhFd.setEsmsghead(new MsgHead());
+		cgjhFd.setEsmsghead(cgjh.getMsgHead());
+		List<CgjhMessage> messages = new ArrayList<CgjhMessage>();
+		messages.add(cgjhMessage);
 		cgjhFd.setEtmessage(messages);
 		
 		ErpConsumerFactory.getConsumer(WSInterface.ERP_CGJH_FEEDBACK)
-						  .prepareData(cgjhFd, cgjh.getCgjh().getZcgjh())
+						  .prepareData(cgjhFd, cgjh.getMsgHead().getGuid(), cgjh.getCgjh().getZcgjh())
 						  .run();
 	}
 

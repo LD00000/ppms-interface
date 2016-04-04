@@ -10,7 +10,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 @Rollback(true)
-@ActiveProfiles("development")
+@ActiveProfiles("test")
 public class SoapHttpTest {
 	
 	@Test

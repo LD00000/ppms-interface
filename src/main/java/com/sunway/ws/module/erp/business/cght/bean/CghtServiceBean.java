@@ -17,7 +17,8 @@ import com.sunway.ws.module.erp.common.bean.MsgHead;
     "ismsghead",
     "isheader",
     "ititems",
-    "itpay"
+    "itpay",
+    "cghtQtfy"
 })
 public class CghtServiceBean {
 
@@ -27,8 +28,10 @@ public class CghtServiceBean {
     protected CghtBean isheader;
     @XmlElement(name = "IT_ITEMS")
     protected List<CghtItemBean> ititems;
-    @XmlElement(name = "IT_PAY")
+    @XmlElement(name = "IS_HEADER_PAY")
     protected List<CghtPayBean> itpay;
+    @XmlElement(name = "IS_HEADER_COND")
+    protected List<CghtQtfyBean> cghtQtfy;
     
 	public MsgHead getIsmsghead() {
 		return ismsghead;
@@ -53,6 +56,12 @@ public class CghtServiceBean {
 	}
 	public void setItpay(List<CghtPayBean> itpay) {
 		this.itpay = itpay;
+	}
+	public List<CghtQtfyBean> getCghtQtfy() {
+		return cghtQtfy;
+	}
+	public void setCghtQtfy(List<CghtQtfyBean> cghtQtfy) {
+		this.cghtQtfy = cghtQtfy;
 	}
 
 }
